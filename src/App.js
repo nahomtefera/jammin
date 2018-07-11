@@ -28,7 +28,25 @@ class App extends Component {
   }
 
   componentWillMount(){
+    let events = this.state.events;
+    let self = this;
 
+    this.db.on("child_added", snap => {
+      let snap_val = snap.val();
+
+      events.push({
+        title: snap_val.title,
+        location: snap_val.location,
+        date: snap_val.date,
+        time: snap_val.time
+      });
+
+      this.setState({
+        events
+      })
+    }
+
+    )
   }
 
   // Adds event to firebase database
