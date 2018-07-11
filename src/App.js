@@ -10,11 +10,16 @@ import {firebase_config} from './firebase.js';
 import firebase from 'firebase/app';
 import 'firebase/database'
 
+// Firebase auth ui
+import StyledFriebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state ={
+      //SignedUser
+      isSigned: false,
       // Events
       events: [],
     }
@@ -63,8 +68,14 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <EventResults events={this.state.events} />
-        <CreateEvent createEvent={this.createEvent} />
+        {this.state.isSigned ? (
+          <div>
+            <EventResults events={this.state.events} />
+            <CreateEvent createEvent={this.createEvent} />
+          </div>
+        ):
+          <div> Sign in Please</div>
+        }
       </div>
     );
   }
