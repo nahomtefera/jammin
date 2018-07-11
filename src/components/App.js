@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 // Components
-import Navbar from './components/navbar/navbar';
-import EventResults from './components/eventResults/eventResults';
-import CreateEvent from './components/createEvent/createEvent';
+import Navbar from './navbar/navbar';
+import EventResults from './eventResults/eventResults';
+import CreateEvent from './createEvent/createEvent';
 
 // Firebase config
-import {firebase_config} from './firebase.js';
+import {firebase_config} from './firebase';
 import firebase from 'firebase';
 // import fireb from 'firebase';
-import 'firebase/database';
+import 'firebase/database/dist/index.cjs';
 
 // Firebase auth ui
 import StyledFriebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -35,7 +35,11 @@ class App extends Component {
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
-        signInSuccess: () => false
+        signInSuccess: () => {
+          this.setState({
+            isSigned: true
+          })
+        }
       }
     }
 
