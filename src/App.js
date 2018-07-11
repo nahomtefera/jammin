@@ -30,7 +30,7 @@ class App extends Component {
   componentWillMount(){
     let events = this.state.events;
     let self = this;
-
+    // We will update state every time an event is created
     this.db.on("child_added", snap => {
       let snap_val = snap.val();
 
@@ -41,12 +41,11 @@ class App extends Component {
         time: snap_val.time
       });
 
-      this.setState({
+      self.setState({
         events
       })
-    }
+    })
 
-    )
   }
 
   // Adds event to firebase database
@@ -64,7 +63,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <EventResults />
+        <EventResults events={this.state.events} />
         <CreateEvent createEvent={this.createEvent} />
       </div>
     );
