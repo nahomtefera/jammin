@@ -7,8 +7,9 @@ import CreateEvent from './components/createEvent/createEvent';
 
 // Firebase config
 import {firebase_config} from './firebase.js';
-import firebase from 'firebase/app';
-import 'firebase/database'
+import firebase from 'firebase';
+// import fireb from 'firebase';
+import 'firebase/database';
 
 // Firebase auth ui
 import StyledFriebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -22,6 +23,20 @@ class App extends Component {
       isSigned: false,
       // Events
       events: [],
+    }
+    // Config for firebaseAuthUi - Authentification
+    this.uiConfig = {
+      signInFlow: "popup",
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      callbacks: {
+        signInSuccess: () => false
+      }
     }
 
     // Initialize Firebase
@@ -74,7 +89,13 @@ class App extends Component {
             <CreateEvent createEvent={this.createEvent} />
           </div>
         ):
-          <div> Sign in Please</div>
+          <div>
+            <div> Sign in Please</div>
+            <StyledFriebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
+          </div>
         }
       </div>
     );
