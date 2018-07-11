@@ -17,10 +17,15 @@ class App extends Component {
     // Initialize Firebase
     this.app = firebase.initializeApp(firebase_config);
     this.db = this.app.database().ref().child("events");
+
+    // Create Event - Add to Database
+    this.createEvent = this.createEvent.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount(){}
 
+  createEvent(event_info){
+    console.log(event_info)
   }
 
   render() {
@@ -28,7 +33,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <EventResults />
-        <CreateEvent />
+        <CreateEvent createEvent={this.createEvent} />
       </div>
     );
   }

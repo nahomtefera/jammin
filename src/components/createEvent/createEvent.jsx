@@ -34,7 +34,8 @@ class CreateEvent extends Component {
                     Date: <input name="date" value={this.state.date} onChange={this.handleInputChange} type="text"/> <br/>
                     Time: <input name="time" value={this.state.time} onChange={this.handleInputChange} type="text"/> <br/>
                 </fieldset>
-                <button>Create Event</button>
+
+                <button onClick={()=>{this.props.createEvent(this.state)}}>Create Event</button>
             </div>
         )
     }
