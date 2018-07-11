@@ -14,6 +14,11 @@ class App extends Component {
   constructor(props) {
     super(props)
 
+    this.state ={
+      // Events
+      events: [],
+    }
+
     // Initialize Firebase
     this.app = firebase.initializeApp(firebase_config);
     this.db = this.app.database().ref().child("events");
@@ -22,10 +27,19 @@ class App extends Component {
     this.createEvent = this.createEvent.bind(this);
   }
 
-  componentWillMount(){}
+  componentWillMount(){
 
+  }
+
+  // Adds event to firebase database
   createEvent(event_info){
-    console.log(event_info)
+    // Add Firebase call to push event to database
+    this.db.push().set({
+      title: event_info.title,
+      location: event_info.location,
+      date: event_info.date,
+      time: event_info.time
+    })
   }
 
   render() {
