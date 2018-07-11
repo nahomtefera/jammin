@@ -9,29 +9,11 @@ class EventResults extends Component {
         this.state = {
             eventResults: [
                 {
-                    title: "jammin in the park",
-                    location: "union square",
-                    time: "10:30",
-                    atendees: "just me"
+                    title: "",
+                    location: "",
+                    time: "",
+                    atendees: ""
                 },
-                {
-                    title: "jammin in the park",
-                    location: "union square",
-                    time: "10:30",
-                    atendees: "just me"
-                },
-                {
-                    title: "jammin in the park",
-                    location: "union square",
-                    time: "10:30",
-                    atendees: "just me"
-                },
-                {
-                    title: "jammin in the park",
-                    location: "union square",
-                    time: "10:30",
-                    atendees: "just me"
-                }
             ]
         }
     }
@@ -41,9 +23,9 @@ class EventResults extends Component {
             <div>
                 {/* loop through eventResults and render every event */}
                 {
-                    this.state.eventResults.map(event => {
+                    this.state.eventResults.map((event, index) => {
                         return (
-                            <Event eventInfo={event} />
+                            <Event key={index} eventInfo={event} />
                         )
                     })
                 }
