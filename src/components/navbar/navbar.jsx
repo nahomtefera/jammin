@@ -7,13 +7,7 @@ const SignOutButton = () => {
     return(
     <button
         type="button"
-        onClick={()=>{
-            firebase.auth().signOut().then(function() {
-                console.log('Signed Out');
-            }, function(error) {
-                console.error('Sign Out Error', error);
-            })
-        }}
+        onClick={()=>{firebase.auth().signOut()}}
     >
         Sign-Out
     </button>

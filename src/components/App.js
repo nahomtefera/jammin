@@ -19,7 +19,9 @@ class App extends Component {
     super(props)
 
     this.state ={
-      //SignedUser
+      // Loader
+      loading: "true",
+      // SignedUser
       authUser: null,
       // Events
       events: [],
@@ -47,6 +49,11 @@ class App extends Component {
   }
 
   componentWillMount(){
+    var self = this;
+
+    setTimeout(function(){ 
+      self.setState({loading:false})
+    }, 1500);
 
   }
 
@@ -65,6 +72,15 @@ class App extends Component {
   }
 
   render() {
+    // Loader
+    if (this.state.loading === 'true') {
+      return (
+        <div className="loader-container">
+          <div className="loader">Loading...</div>
+        </div>
+      )
+    }
+    // App
     return (
       <BrowserRouter> 
         <div className="App">
@@ -94,7 +110,6 @@ class App extends Component {
                 this.state.authUser ? ""
                 : 
                 <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
-                
               )
             }
               
