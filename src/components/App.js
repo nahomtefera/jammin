@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './navbar/navbar';
 import EventResults from './eventResults/eventResults';
 import CreateEvent from './createEvent/createEvent';
+import LandingPage from './landingPage/landingPage';
 // React-router
 import { BrowserRouter, Route } from 'react-router-dom';
 // Firebase config
@@ -89,20 +90,22 @@ class App extends Component {
           <Navbar />
           <hr />
           <Route
-            exact path="/account"
-            render={(props) => <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />}
-          />
+            exact path="/"
+            render={() => 
+              <LandingPage/>
+          }/>
           <Route
             exact path="/home"
-            render={(props) =>  {
-              return (
-                <div>
-                  <EventResults {...props} events={this.state.events} />
-                  <CreateEvent {...props} createEvent={this.createEvent} />
-                </div>
-              )
-            }
-              
+            render={(props) =>  
+              <div>
+                <EventResults {...props} events={this.state.events} />
+                <CreateEvent {...props} createEvent={this.createEvent} />
+              </div>  
+          }/>
+          <Route
+            exact path="/sign-in"
+            render={(props) => 
+              <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
           }/>
 
         </div>
