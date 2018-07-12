@@ -7,6 +7,7 @@ class EventResults extends Component {
     render() {
         return (
             <div>
+                Events go here
                 {/* loop through events passed as props and render every event */}
                 {
                     this.props.events.map((event, index) => {
