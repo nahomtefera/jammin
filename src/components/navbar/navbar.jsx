@@ -21,15 +21,15 @@ class Navbar extends Component {
             <div>
                 {
                     this.props.authUser ? 
-                        <ul>
-                            <li><Link to="/">Landing Page</Link></li>
-                            <li><Link to="home">Home</Link></li>
-                            <li><SignOutButton /></li>
+                        <ul className="navbar-list-container">
+                            <li className="navbar-list-item" ><Link to="/">Landing Page</Link></li>
+                            <li className="navbar-list-item" ><Link to="home">Home</Link></li>
+                            <li className="navbar-list-item sign-out-button" ><SignOutButton /></li>
                         </ul>
                     :
-                        <ul>
-                            <li><Link to="/">Landing Page</Link></li>
-                            <li><Link to="sign-in">Sign-In</Link></li>
+                        <ul className="navbar-list-container">
+                            <li className="navbar-list-item" ><Link to="/">Landing Page</Link></li>
+                            <li className="navbar-list-item sign-in-button" ><Link to="sign-in">Sign-In</Link></li>
                         </ul>
                 }
                 

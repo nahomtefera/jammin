@@ -1,0 +1,76 @@
+.navbar-list-container {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    width: 1000px;
+    max-width: 95%;
+    margin: 13px auto;
+}
+
+.navbar-list-item {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.navbar-list-item a {
+    text-decoration: none;
+    color: #454545;
+    cursor: pointer;
+}
+
+.navbar-list-item a:hover {
+    color: #212121;
+}
+
+.navbar-list-item a:visited {
+    color: #454545;
+}
+
+/* Sign-in // Sign-out */
+
+.sign-in-button {
+    margin-left: auto;
+}
+
+.sign-out-button {
+    margin-left: auto;
+}
+
+.sign-in-button a{
+    border: none;
+    background: #29a75e;
+    border: 2px solid #29a75e;
+    color: white!important;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sign-in-button a:hover {
+    background: white;
+    border: 2px solid #29a75e;
+    color: #29a75e!important;
+}
+
+
+.sign-out-button button{
+    border: none;
+    background: #f15c5c;
+    border: 2px solid #f15c5c;
+    color: white;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.sign-out-button button:hover {
+    background: white;
+    border: 2px solid #f15c5c;
+    color: #f15c5c;
+}

@@ -6,7 +6,7 @@ import EventResults from './eventResults/eventResults';
 import CreateEvent from './createEvent/createEvent';
 import LandingPage from './landingPage/landingPage';
 // React-router
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 // Firebase 
 import './firebase/';
 import firebase from 'firebase';
@@ -105,6 +105,9 @@ class App extends Component {
           <Route
             exact path="/sign-in"
             render={(props) => {
+              if (this.state.authUser !== null) {
+                return <Redirect to='/' />
+              }
               return (
                 // Only show sign-in if user is not authenticized
                 this.state.authUser ? ""
