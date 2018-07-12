@@ -1,17 +1,44 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import firebase from 'firebase';
 import './navbar.css';
+
+const SignOutButton = () => {
+    return(
+    <button
+        type="button"
+        onClick={()=>{
+            firebase.auth().signOut().then(function() {
+                console.log('Signed Out');
+            }, function(error) {
+                console.error('Sign Out Error', error);
+            })
+        }}
+    >
+        Sign-Out
+    </button>
+    )
+}
 
 class Navbar extends Component {
 
     render() {
         return (
             <div>
-                <ul>
-                    <li><Link to="/">Landing Page</Link></li>
-                    <li><Link to="home">Home</Link></li>
-                    <li><Link to="sign-in">Sign-In</Link></li>
-                </ul>
+                {
+                    this.props.authUser ? 
+                        <ul>
+                            <li><Link to="/">Landing Page</Link></li>
+                            <li><Link to="home">Home</Link></li>
+                            <li><SignOutButton /></li>
+                        </ul>
+                    :
+                        <ul>
+                            <li><Link to="/">Landing Page</Link></li>
+                            <li><Link to="sign-in">Sign-In</Link></li>
+                        </ul>
+                }
+                
             </div>
         )
     }
