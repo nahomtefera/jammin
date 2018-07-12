@@ -1,5 +1,6 @@
 import api_keys from '../api_keys';
 import firebase from 'firebase/app';
+import 'firebase/database';
 import 'firebase/auth'
 
 // Firebase config
@@ -32,9 +33,10 @@ if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
 
-// Initialize and export Auth
-const auth = firebase.auth();
+// Firebase database call
+const db = firebase.database();
 
-// export {
-//     auth
-// }
+
+export {
+    db,
+};

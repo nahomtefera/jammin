@@ -10,6 +10,8 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 // Firebase 
 import './firebase/';
 import firebase from 'firebase';
+import { db } from './firebase/';
+
 
 // Firebase auth ui
 import StyledFriebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -31,13 +33,19 @@ class App extends Component {
       signInFlow: "popup",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         // firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
-        signInSuccessWithAuthResult: () => {
+        signInSuccessWithAuthResult: (data) => {
+          // If the user signing-in is a new user
+          // We will create add them to the firebase database
+          if(data.additionalUserInfo.isNewUser === true) {
+            db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
+          } 
+        
           this.setState({
             authUser: true
           })
@@ -49,15 +57,19 @@ class App extends Component {
   }
 
   componentWillMount(){
+    // Loader
     var self = this;
-
     setTimeout(function(){ 
       self.setState({loading:false})
-    }, 1500);
-
+    }, 1000);
+    // 
   }
 
   componentDidMount() {
+    // Everytime user signs-in or out
+    // We will update the state
+    // Set it to null if users signs-out
+    // And set it to user if user signs-in
     firebase.auth().onAuthStateChanged(authUser => {
       authUser
         ? this.setState(() => ({ authUser }))
@@ -86,25 +98,38 @@ class App extends Component {
         <div className="App">
           <Navbar authUser={this.state.authUser}/>
           <hr />
+
           {/* Main Page that users and guests will see without signing-in */}
           <Route
             exact path="/"
             render={() => 
               <LandingPage/>
           }/>
+
           {/* Home page that would appear when a user signs-in */}
           <Route
             exact path="/home"
-            render={(props) =>  
-              <div>
-                <EventResults {...props} events={this.state.events} />
-                <CreateEvent {...props} createEvent={this.createEvent} />
-              </div>  
+            render={(props) => {
+              // If user has NOT signed-in
+              // Going to /home page will redirect to landing page
+              if (this.state.authUser === null) {
+                return <Redirect to='/' />
+              }
+              return(
+                <div>
+                  <EventResults {...props} events={this.state.events} />
+                  <CreateEvent {...props} createEvent={this.createEvent} />
+                </div>  
+              )
+            } 
           }/>
+
           {/* Sign-in page */}
           <Route
             exact path="/sign-in"
             render={(props) => {
+              // If user has already signed-in
+              // Going to /sign-in page will redirect to landing page
               if (this.state.authUser !== null) {
                 return <Redirect to='/' />
               }
