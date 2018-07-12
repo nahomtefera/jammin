@@ -4,13 +4,12 @@ import './App.css';
 import Navbar from './navbar/navbar';
 import EventResults from './eventResults/eventResults';
 import CreateEvent from './createEvent/createEvent';
-
+// React-router
+import { BrowserRouter, Route } from 'react-router-dom';
 // Firebase config
 import {firebase_config} from './firebase';
 import firebase from 'firebase';
-// import fireb from 'firebase';
 import 'firebase/database/dist/index.cjs';
-
 // Firebase auth ui
 import StyledFriebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
@@ -20,7 +19,7 @@ class App extends Component {
 
     this.state ={
       //SignedUser
-      isSigned: false,
+      // isSigned: false,
       // Events
       events: [],
     }
@@ -35,7 +34,7 @@ class App extends Component {
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
-        signInSuccess: () => {
+        signInSuccessWithAuthResult: () => {
           this.setState({
             isSigned: true
           })
@@ -85,23 +84,30 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        {this.state.isSigned ? (
-          <div>
-            <EventResults events={this.state.events} />
-            <CreateEvent createEvent={this.createEvent} />
-          </div>
-        ):
-          <div>
-            <div> Sign in Please</div>
-            <StyledFriebaseAuth
-              uiConfig={this.uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          </div>
-        }
-      </div>
+      <BrowserRouter> 
+        <div className="App">
+          <Navbar />
+          <hr />
+          <Route
+            exact path="/account"
+            render={(props) => <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />}
+          />
+          <Route
+            exact path="/home"
+            render={(props) =>  {
+              return (
+                <div>
+                  <EventResults {...props} events={this.state.events} />
+                  <CreateEvent {...props} createEvent={this.createEvent} />
+                </div>
+              )
+            }
+              
+          }/>
+
+        </div>
+      </BrowserRouter>
+        
     );
   }
 }
