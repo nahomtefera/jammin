@@ -82,7 +82,7 @@ class Account extends Component {
                             </div>
                         </div>
                         {/* Bio */}
-                        <div className="account-info-form-field">
+                        <div className="account-info-form-field bio-input">
                             <div className="account-info-form-field-label">
                                 <label htmlFor="bio">Bio</label>
                             </div>

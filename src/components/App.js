@@ -26,6 +26,8 @@ class App extends Component {
       loading: "true",
       // SignedUser
       authUser: null,
+      // Create Event
+      creatingEvent: false,
       // Events
       events: [],
     }
@@ -55,6 +57,7 @@ class App extends Component {
     }
     // Create Event - Add to Database
     this.createEvent = this.createEvent.bind(this);
+    this.toggleCreateEventWindow = this.toggleCreateEventWindow.bind(this);
   }
 
   componentWillMount(){
@@ -78,6 +81,9 @@ class App extends Component {
     });
   }
 
+  toggleCreateEventWindow(){
+    this.setState({creatingEvent: !this.state.creatingEvent})
+  }
   // Adds event to firebase database
   createEvent(event_info){
     // Add Firebase call to push event to database
@@ -137,7 +143,9 @@ class App extends Component {
               return(
                 <div>
                   <EventResults {...props} events={this.state.events} />
-                  <CreateEvent {...props} createEvent={this.createEvent} />
+                  {this.state.creatingEvent != false ? <CreateEvent {...props} createEvent={this.createEvent} /> : ""}
+                  
+                  <button className="toggle-create-event-window" onClick={this.toggleCreateEventWindow}>Open Create Event</button>
                 </div>  
               )
             } 
