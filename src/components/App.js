@@ -27,7 +27,7 @@ class App extends Component {
       // SignedUser
       authUser: null,
       // Create Event
-      creatingEvent: false,
+      creatingEvent: true,
       // Events
       events: [],
     }
@@ -142,10 +142,12 @@ class App extends Component {
               }
               return(
                 <div>
+                  {/* Show all events */}
                   <EventResults {...props} events={this.state.events} />
-                  {this.state.creatingEvent != false ? <CreateEvent {...props} createEvent={this.createEvent} /> : ""}
                   
-                  <button className="toggle-create-event-window" onClick={this.toggleCreateEventWindow}>Open Create Event</button>
+                  {/* Modal to Create Events */}
+                  {this.state.creatingEvent != false ? <CreateEvent {...props} toggleWindow={this.toggleCreateEventWindow} createEvent={this.createEvent} /> : ""}
+                  <button className={this.state.creatingEvent ? "hide" : "toggle-create-event-window"} onClick={this.toggleCreateEventWindow}>Open Create Event</button>
                 </div>  
               )
             } 
