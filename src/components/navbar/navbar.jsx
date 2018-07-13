@@ -29,7 +29,7 @@ class Navbar extends Component {
                     :
                         <ul className="navbar-list-container">
                             <li className="navbar-list-item" ><Link to="/">Landing Page</Link></li>
-                            <li className="navbar-list-item sign-in-button" ><Link to="sign-in">Sign-In</Link></li>
+                            <li className="navbar-list-item sign-in-button" ><Link to="sign-in">Login</Link></li>
                         </ul>
                 }
                 

@@ -97,6 +97,9 @@ class App extends Component {
       <BrowserRouter> 
         <div className="App">
           <Navbar authUser={this.state.authUser}/>
+          <button onClick={()=>{
+            console.log("current user: ",firebase.auth().currentUser)
+          }}>Current User</button>
           <hr />
 
           {/* Main Page that users and guests will see without signing-in */}
