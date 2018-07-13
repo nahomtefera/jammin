@@ -33,6 +33,10 @@ import { db } from '../firebase';
     imageURL
   });
 
-  // Get all users
+  // Get all Events
   export const onceGetEvents = () =>
   db.ref('events').once('value');
+
+  // All child events
+  export const getChildEvents = () =>
+  db.ref().child("events");

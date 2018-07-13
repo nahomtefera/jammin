@@ -48,7 +48,8 @@ class App extends Component {
           if(data.additionalUserInfo.isNewUser === true) {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
           } 
-        
+
+
           this.setState({
             authUser: true
           })
@@ -66,7 +67,18 @@ class App extends Component {
     setTimeout(function(){ 
       self.setState({loading:false})
     }, 1000);
-    // 
+
+    // If the user is authenticated we can get all the events
+    let events = []
+
+    if(this.state.authUser != "null"){
+      db.getChildEvents().on("child_added", snap=>{
+        events.push(snap.val())
+      })
+    }
+
+    this.setState({events})
+
   }
 
   componentDidMount() {
