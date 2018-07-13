@@ -12,9 +12,20 @@ class Account extends Component {
         this.state = {
             //username, email, name, bio, gender, photoURL
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    componentWillMount(){
+    handleInputChange(el) {
+        let val = el.target.value;
+        let property = el.target.name;
+
+        this.setState({
+            [property]: val
+        })
+    }
+
+    componentWillMount() {
         var uid = this.props.user.uid;
         
         db.onceGetUsers().then((snap)=>{
@@ -49,7 +60,7 @@ class Account extends Component {
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="account-info-form-field-input">
-                                <input name="name" placeholder="name" type="text"/>
+                                <input name="name" placeholder="name" onChange={this.handleInputChange} value={this.state.name} type="text"/>
                             </div>
                         </div>
                         {/* Username */}
@@ -58,7 +69,7 @@ class Account extends Component {
                                 <label htmlFor="username">Username</label>
                             </div>
                             <div className="account-info-form-field-input">
-                                <input name="username" placeholder="username" type="text"/>
+                                <input name="username" placeholder="username" onChange={this.handleInputChange} value={this.state.username} type="text"/>
                             </div>
                         </div>
                         {/* Email */}
@@ -67,7 +78,7 @@ class Account extends Component {
                                 <label htmlFor="email">Email</label>
                             </div>
                             <div className="account-info-form-field-input">
-                                <input name="email" placeholder="email" type="text"/>
+                                <input name="email" placeholder="email" onChange={this.handleInputChange} value={this.state.email} type="text"/>
                             </div>
                         </div>
                         {/* Bio */}
@@ -76,7 +87,7 @@ class Account extends Component {
                                 <label htmlFor="bio">Bio</label>
                             </div>
                             <div className="account-info-form-field-input">
-                                <textarea name="bio" placeholder="bio" id="" cols="30" rows="10"></textarea>
+                                <textarea name="bio" placeholder="Bio" onChange={this.handleInputChange} value={this.state.bio} cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

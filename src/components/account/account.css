@@ -91,6 +91,7 @@
 
 .account-info-form-field-input input, .account-info-form-field-input textarea {
     padding: 8px;
+    width: 240px;
     border-radius: 3px;
     border: 1px solid #efefef;
     outline: none;
