@@ -1,3 +1,7 @@
+.navbar-container {
+    border-bottom: 1px solid #efefef;
+}
+
 .navbar-list-container {
     list-style: none;
     display: flex;
