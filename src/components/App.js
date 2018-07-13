@@ -27,7 +27,7 @@ class App extends Component {
       // SignedUser
       authUser: null,
       // Create Event
-      creatingEvent: true,
+      creatingEvent: false,
       // Events
       events: [],
     }
@@ -87,7 +87,10 @@ class App extends Component {
   // Adds event to firebase database
   createEvent(event_info){
     // Add Firebase call to push event to database
+    // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
+    db.doCreateEvent(Date.now(), event_info.uid, event_info.title, event_info.location, event_info.date, event_info.time, event_info.description, event_info.imageURL)
     
+    this.toggleCreateEventWindow()
   }
 
   render() {

@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import './createEvent.css';
+import firebase from 'firebase/app';
+import '../firebase/';
+import { db } from '../firebase/';
 
 class CreateEvent extends Component {
     constructor(props){
         super(props)
 
         this.state = {
+            uid: firebase.auth().currentUser.uid,
+            imageURL: "",
             title: "",
             location: "",
             date: "",
