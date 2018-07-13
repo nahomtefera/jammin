@@ -9,7 +9,9 @@ class Account extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {}
+        this.state = {
+            //username, email, name, bio, gender, photoURL
+        }
     }
 
     componentWillMount(){
@@ -24,11 +26,61 @@ class Account extends Component {
 
     render() {
         return (
-            <div>
-                <div className="profile-picture-container">
-                    <img className="profile-picture-img" src={this.state.photoURL} alt="profile pic"/>
+            <div className="account-container">
+                {/* Account Navigation Container */}
+                <div className="account-nav-container">
+                    <ul className="account-nav-list">
+                        <li className="account-nav-list-item">Edit Profile</li>
+                        <li className="account-nav-list-item">Change Password</li>
+                    </ul>
                 </div>
-                <span>{this.state.username}</span>
+                {/* Account Info Container */}
+                <div className="account-info-container">
+                    <div className="profile-picture-container">
+                        <img className="profile-picture-img" src={this.state.photoURL} alt="profile pic"/>
+                    </div>
+                    <div className="display-name">{this.props.user.displayName}</div>
+                    
+                    {/* Info Change Form */}
+                    <div className="account-info-form">
+                        {/* Name */}
+                        <div className="account-info-form-field">
+                            <div className="account-info-form-field-label">
+                                <label htmlFor="name">Name</label>
+                            </div>
+                            <div className="account-info-form-field-input">
+                                <input name="name" placeholder="name" type="text"/>
+                            </div>
+                        </div>
+                        {/* Username */}
+                        <div className="account-info-form-field">
+                            <div className="account-info-form-field-label">
+                                <label htmlFor="username">Username</label>
+                            </div>
+                            <div className="account-info-form-field-input">
+                                <input name="username" placeholder="username" type="text"/>
+                            </div>
+                        </div>
+                        {/* Email */}
+                        <div className="account-info-form-field">
+                            <div className="account-info-form-field-label">
+                                <label htmlFor="email">Email</label>
+                            </div>
+                            <div className="account-info-form-field-input">
+                                <input name="email" placeholder="email" type="text"/>
+                            </div>
+                        </div>
+                        {/* Bio */}
+                        <div className="account-info-form-field">
+                            <div className="account-info-form-field-label">
+                                <label htmlFor="bio">Bio</label>
+                            </div>
+                            <div className="account-info-form-field-input">
+                                <textarea name="bio" placeholder="bio" id="" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
