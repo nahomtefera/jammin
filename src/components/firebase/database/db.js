@@ -7,7 +7,10 @@ export const doCreateUser = (id, username, email, photoURL) =>
   db.ref(`users/${id}`).set({
     username,
     email,
-    photoURL
+    photoURL,
+    name: "",
+    bio: "",
+    gender: "",
   });
 
 // Get all users

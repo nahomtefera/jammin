@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 // Components
 import Navbar from './navbar/navbar';
+import Account from './account/account';
 import EventResults from './eventResults/eventResults';
 import CreateEvent from './createEvent/createEvent';
 import LandingPage from './landingPage/landingPage';
 // React-router
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 // Firebase 
+import firebase from 'firebase/app';
 import './firebase/';
-import firebase from 'firebase';
 import { db } from './firebase/';
 
 
@@ -97,9 +98,9 @@ class App extends Component {
       <BrowserRouter> 
         <div className="App">
           <Navbar authUser={this.state.authUser}/>
-          <button onClick={()=>{
+          {/* <button onClick={()=>{
             console.log("current user: ",firebase.auth().currentUser)
-          }}>Current User</button>
+          }}>Current User</button> */}
           <hr />
 
           {/* Main Page that users and guests will see without signing-in */}
@@ -107,6 +108,21 @@ class App extends Component {
             exact path="/"
             render={() => 
               <LandingPage/>
+          }/>
+
+          {/* Account Page to edit account info*/}
+          <Route
+            exact path="/account"
+            render={(props) => {
+              // If user has NOT signed-in
+              // Going to /home page will redirect to landing page
+              if (this.state.authUser === null) {
+                return <Redirect to='/' />
+              }
+              return(
+                <Account user={firebase.auth().currentUser}/>
+              )
+            } 
           }/>
 
           {/* Home page that would appear when a user signs-in */}
