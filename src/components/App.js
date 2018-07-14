@@ -37,8 +37,8 @@ class App extends Component {
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
@@ -48,7 +48,6 @@ class App extends Component {
           if(data.additionalUserInfo.isNewUser === true) {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
           } 
-
 
           this.setState({
             authUser: true
@@ -118,14 +117,19 @@ class App extends Component {
     return (
       <BrowserRouter> 
         <div className="App">
-          <Navbar authUser={this.state.authUser}/>
 
           {/* Main Page that users and guests will see without signing-in */}
           <Route
+            
             exact path="/"
             render={() => 
-              <LandingPage/>
-          }/>
+              <div>
+                <Navbar isLandingPage={true} authUser={this.state.authUser}/>
+                <LandingPage/>
+              </div>
+              
+            }
+          />
 
           {/* Account Page to edit account info*/}
           <Route
@@ -137,7 +141,10 @@ class App extends Component {
                 return <Redirect to='/' />
               }
               return(
-                <Account user={firebase.auth().currentUser}/>
+                <div>
+                  <Navbar authUser={this.state.authUser}/>
+                  <Account user={firebase.auth().currentUser}/>
+                </div>
               )
             } 
           }/>
@@ -153,9 +160,9 @@ class App extends Component {
               }
               return(
                 <div>
+                  <Navbar authUser={this.state.authUser}/>
                   {/* Show all events */}
                   <EventResults {...props} events={this.state.events} />
-                  
                   {/* Modal to Create Events */}
                   {this.state.creatingEvent != false ? <CreateEvent {...props} toggleWindow={this.toggleCreateEventWindow} createEvent={this.createEvent} /> : ""}
                   <button className={this.state.creatingEvent ? "hide" : "toggle-create-event-window"} onClick={this.toggleCreateEventWindow}>Open Create Event</button>

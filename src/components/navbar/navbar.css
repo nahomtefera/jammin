@@ -1,15 +1,18 @@
 .navbar-container {
     border-bottom: 1px solid #efefef;
+    overflow: auto;
 }
 
 .navbar-list-container {
     list-style: none;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-align: center;
     align-items: center;
-    padding: 0;
+    padding: 13px 0;
     width: 1000px;
     max-width: 95%;
-    margin: 13px auto;
+    margin: 0 auto;
 }
 
 .navbar-list-item {
@@ -35,6 +38,7 @@
 
 .sign-in-button {
     margin-left: auto;
+    color: #29a75e;
 }
 
 .sign-out-button {
@@ -43,9 +47,9 @@
 
 .sign-in-button a{
     border: none;
-    background: #29a75e;
+    background: none;
     border: 2px solid #29a75e;
-    color: white!important;
+    color: #29a75e!important;
     border-radius: 4px;
     padding: 8px;
     font-size: 0.8em;
@@ -55,7 +59,7 @@
 }
 
 .sign-in-button a:hover {
-    background: white;
+    background: none;
     border: 2px solid #29a75e;
     color: #29a75e!important;
 }
@@ -63,9 +67,9 @@
 
 .sign-out-button button{
     border: none;
-    background: #f15c5c;
+    background: none;
     border: 2px solid #f15c5c;
-    color: white;
+    color: #f15c5c;
     border-radius: 4px;
     padding: 8px;
     font-size: 0.8em;
@@ -76,7 +80,21 @@
 }
 
 .sign-out-button button:hover {
-    background: white;
+    background: none;
     border: 2px solid #f15c5c;
     color: #f15c5c;
+}
+
+/* If Navbar is in landing page link colors will be white */
+
+.navbar-container-landing-page li a {
+    color: white!important
+}
+
+.navbar-container-landing-page .sign-in-button a{
+    color: #29a75e!important;
+}
+
+.navbar-container-landing-page .sign-out-button a{
+    color: #f15c5c!important;
 }

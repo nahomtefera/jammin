@@ -5,8 +5,13 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Landing Page</h1>
+            <div className="landing-page-container">
+                <div className="landing-page-intro">
+                    
+                </div>
+                <div className="landing-page-info-box">
+
+                </div>
             </div>
         )
     }

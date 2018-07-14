@@ -1,0 +1,24 @@
+.landing-page-intro {
+    background:   linear-gradient(
+        rgba(0, 0, 0, 0.45), 
+        rgba(0, 0, 0, 0.45)
+      ), url(https://images.unsplash.com/photo-1491175372190-b0c288dcf1e2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a968ee54be947b275cb1439066816d4a&auto=format&fit=crop&w=2850&q=80);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 725px;
+    margin-top: -62px;
+    z-index: -1;
+}
+
+.landing-page-info-box {
+    width: 900px;
+    max-width: 90%;
+    height: 230px;
+    margin: 0 auto;
+    margin-top: -115px;
+    border-radius: 5px;
+    background: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
+    box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
+}

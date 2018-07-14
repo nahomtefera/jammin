@@ -18,7 +18,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div className="navbar-container">
+            <div className={this.props.isLandingPage === true ? "navbar-container-landing-page" : "navbar-container"}>
                 {
                     this.props.authUser ? 
                         <ul className="navbar-list-container">

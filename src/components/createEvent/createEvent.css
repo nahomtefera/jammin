@@ -118,7 +118,7 @@
 
 .create-event-button:hover {
     color: #66bb6a;
-    background: white;
+    background: none;
 }
 
 .cancel-event-button {
@@ -137,5 +137,5 @@
 
 .cancel-event-button:hover {
     color: crimson;
-    background: white;
+    background: none;
 }

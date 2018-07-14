@@ -27,7 +27,6 @@ class Account extends Component {
 
     componentWillMount() {
         var uid = this.props.user.uid;
-        
         db.onceGetUsers().then((snap)=>{
             var user_info = snap.val()[uid];
 
