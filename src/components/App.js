@@ -65,7 +65,7 @@ class App extends Component {
     var self = this;
     setTimeout(function(){ 
       self.setState({loading:false})
-    }, 1000);
+    }, 1500);
 
     // If the user is authenticated we can get all the events
     let events = []
@@ -184,7 +184,10 @@ class App extends Component {
                 // Only show sign-in if user is not authenticized
                 this.state.authUser ? ""
                 : 
-                <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                <div> 
+                  <Navbar authUser={this.state.authUser}/>
+                  <StyledFriebaseAuth {...props} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                </div>
               )
             }
               

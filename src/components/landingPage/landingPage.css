@@ -7,22 +7,10 @@
     background-position: center;
     width: 100%;
     min-height: 725px;
-    margin-top: -62px;
+    margin-top: -70px;
     z-index: -1;
     display: flex;
     align-items: center;
-}
-
-.landing-page-info-box {
-    width: 900px;
-    max-width: 90%;
-    height: 230px;
-    margin: 0 auto;
-    margin-top: -115px;
-    border-radius: 5px;
-    background: white;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
-    box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
 }
 
 .landing-page-intro-title {
@@ -40,4 +28,49 @@
 
 .landing-page-intro-sub-title-emphasis {
     color: #ff5722;
+}
+
+.landing-page-info-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 900px;
+    max-width: 90%;
+    min-height: 230px;
+    margin: 0 auto;
+    margin-top: -115px;
+    border-radius: 5px;
+    background: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
+    box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
+}
+
+.loading-page-info-box-item {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 80%;
+    min-width: 230px;
+    min-height: 230px;
+    box-sizing: border-box;
+    padding: 25px;
+    border-right: 1px solid #eaeaea;
+}
+
+.loading-page-info-box-item:last-child {
+    border: none;
+}
+
+.box-item-title {
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #e04e22;
+}
+
+.box-item-description {
+    text-align: center;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 1.2em;
 }
