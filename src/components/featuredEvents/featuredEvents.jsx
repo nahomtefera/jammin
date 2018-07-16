@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import './featuredEvents.css';
 
 class FeaturedEvents extends Component {
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            events: [1, 2, 3, 4,]
+        }
+    }
 
     render() {
         return (
@@ -13,13 +21,23 @@ class FeaturedEvents extends Component {
                         <polygon fill="white" points="0,0 100,0 100,20"/>
                     </svg>
                 </div>
-                <div className="featured-events">
-                    <div className="featured-events-item">
-                        <h3>Event Title</h3>
-                        <h4>Event Location</h4>
-                        <p>Event Description</p>
 
-                    </div>
+                <div className="featured-events">
+                    {this.state.events.map((event, index)=>{
+                        return(
+                                <div key={index} className="featured-events-item">
+                                    <div className="featured-events-item-img-container">
+                                        <img src="https://goo.gl/ZUCcqq" alt="band"/>
+                                    </div>
+
+                                    <div className="featured-events-info">
+                                        <h3>Event Title</h3>
+                                        <h4>Event Location</h4>
+                                        <p>Event Description</p>
+                                    </div>
+                                </div>
+                        )
+                    })}
                 </div>
             </div>
         )
