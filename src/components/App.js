@@ -114,7 +114,7 @@ class App extends Component {
       // Send IMG file to method that will upload it to storage
       this.uploadEventImg(event.uploadedImg, event.id)
     })
-    
+    // Close create event modal
     this.toggleCreateEventWindow();
   }
 
@@ -133,7 +133,7 @@ class App extends Component {
       // Observe state change events such as progress, pause, and resume
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      self.setState({loading: "true"})
+      self.setState({loading: "loading-event"})
 
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
@@ -167,7 +167,17 @@ class App extends Component {
     if (this.state.loading === 'true') {
       return (
         <div className="loader-container">
+          <h1 className="loader-text">Welcome!</h1>
           <div className="loader">Loading...</div>
+        </div>
+      )
+    }
+    // Loading Event
+    if (this.state.loading === 'loading-event') {
+      return (
+        <div className="event-loader-container">
+          <h1 className="event-loader-text">Uploading Event . . .</h1>
+          <div className="event-loader">Loading...</div>
         </div>
       )
     }
