@@ -27,7 +27,7 @@ class App extends Component {
       // SignedUser
       authUser: null,
       // Create Event
-      creatingEvent: false,
+      creatingEvent: true,
       // Events
       events: [],
     }

@@ -43,9 +43,15 @@ class CreateEvent extends Component {
                     </div>
 
                     <div className="create-event-modal-info-container">
-                        <div className="create-event-modal-image">
 
+                        <div className="create-event-modal-image-container">
+                            <div className="create-event-modal-image"></div>
+                            <label htmlFor="input-file" className="input-file-label">
+                                <input id="input-file" type="file"/>
+                                Add image
+                            </label>
                         </div>
+
                         <div className="create-event-modal-info">
                             <div className="create-event-modal-info-field">
                                 <div className="create-event-modal-info-label" htmlFor="title">Title</div>

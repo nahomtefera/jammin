@@ -40,6 +40,12 @@
     margin-right: auto;
 }
 
+.create-event-modal-image-container {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+}
+
 .create-event-modal-image {
     width: 200px;
     height: 200px;
@@ -53,6 +59,17 @@
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.input-file-label {
+    cursor: pointer;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 .create-event-modal-info {
