@@ -59,6 +59,11 @@
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
+    overflow: hidden;
+}
+
+.event-img-item {
+    height: 100%;
 }
 
 .input-file-label {

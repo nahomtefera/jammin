@@ -10,15 +10,17 @@ class CreateEvent extends Component {
 
         this.state = {
             uid: firebase.auth().currentUser.uid,
-            imageURL: "",
+            imageURL: false,
             title: "",
             location: "",
             date: "",
             time: "",
-            description: ""           
+            description: "",
+            uploadedImg: false,           
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputFileChange = this.handleInputFileChange.bind(this);
     }
 
     handleInputChange(el) {
@@ -28,6 +30,16 @@ class CreateEvent extends Component {
         this.setState({
             [inputName]: value
         })
+    }
+
+    handleInputFileChange(el) {
+        let target = el.target;
+        let file = el.target.files[0]
+        this.setState({
+            uploadedImg: file,
+            imageURL: URL.createObjectURL(file)
+        })
+        
     }
 
     render() {
@@ -45,10 +57,18 @@ class CreateEvent extends Component {
                     <div className="create-event-modal-info-container">
 
                         <div className="create-event-modal-image-container">
-                            <div className="create-event-modal-image"></div>
+                            <div className="create-event-modal-image">
+                                {this.state.imageURL != false ?
+                                    <img className="event-img-item" src={this.state.imageURL}  alt="event pic"/>
+                                    : ""
+                                }
+                            </div>
                             <label htmlFor="input-file" className="input-file-label">
-                                <input id="input-file" type="file"/>
-                                Add image
+                                <input onChange={this.handleInputFileChange} id="input-file" type="file"/>
+                                {this.state.uploadedImg === false
+                                    ? "Add Image"
+                                    : "Change Image"
+                                }
                             </label>
                         </div>
 
