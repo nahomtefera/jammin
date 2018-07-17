@@ -10,6 +10,7 @@ class CreateEvent extends Component {
 
         this.state = {
             uid: firebase.auth().currentUser.uid,
+            id: "",
             imageURL: false,
             title: "",
             location: "",
@@ -21,6 +22,7 @@ class CreateEvent extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputFileChange = this.handleInputFileChange.bind(this);
+        this.createEvent = this.createEvent.bind(this);
     }
 
     handleInputChange(el) {
@@ -39,7 +41,14 @@ class CreateEvent extends Component {
             uploadedImg: file,
             imageURL: URL.createObjectURL(file)
         })
-        
+    }
+
+    createEvent() {
+        // Change ID value to the time when the event is created
+        // And then call createEvent method from parent
+        this.setState({id: Date.now()},()=>{
+            this.props.createEvent(this.state)
+        })
     }
 
     render() {
@@ -103,7 +112,7 @@ class CreateEvent extends Component {
                     </div>
                         
                     <div className="create-cancel-buttons-container">
-                        <button className="create-event-button" onClick={()=>{this.props.createEvent(this.state)}}>Create Event</button>
+                        <button className="create-event-button" onClick={this.createEvent}>Create Event</button>
                         <button className="cancel-event-button" onClick={()=>{this.props.toggleWindow()}}>Cancel</button>
                     </div>
                 </div>

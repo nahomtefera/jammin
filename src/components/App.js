@@ -67,6 +67,7 @@ class App extends Component {
     // Create Event - Add to Database
     this.createEvent = this.createEvent.bind(this);
     this.toggleCreateEventWindow = this.toggleCreateEventWindow.bind(this);
+    this.uploadEventImg = this.uploadEventImg.bind(this);
   }
 
   componentWillMount(){
@@ -108,9 +109,18 @@ class App extends Component {
   createEvent(event_info){
     // Add Firebase call to push event to database
     // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
-    db.doCreateEvent(Date.now(), event_info.uid, event_info.title, event_info.location, event_info.date, event_info.time, event_info.description, event_info.imageURL)
+    // db.doCreateEvent(event_info.id, event_info.uid, event_info.title, event_info.location, event_info.date, event_info.time, event_info.description, event_info.imageURL)
     
-    this.toggleCreateEventWindow()
+    this.toggleCreateEventWindow();
+    // Send IMG file to method that will upload it to storage
+    this.uploadEventImg(event_info.uploadedImg, event_info.id)
+  }
+
+  uploadEventImg(file, event_id) {
+    // Create Storage Ref
+    let storageRef = firebase.storage().ref('images/events/' + event_id)
+    // Upload File
+    storageRef.put(file)
   }
 
   render() {
