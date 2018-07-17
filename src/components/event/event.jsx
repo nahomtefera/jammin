@@ -24,7 +24,6 @@ class Event extends Component {
         firebase.database().ref(`users/${this.props.eventInfo.uid}`).once('value').then(snap=>{
             // console.log(snap.val())
             this.setState({event_owner: snap.val()})
-
         });
 
     }

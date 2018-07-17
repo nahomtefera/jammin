@@ -46,9 +46,13 @@ class CreateEvent extends Component {
     createEvent() {
         // Change ID value to the time when the event is created
         // And then call createEvent method from parent
-        this.setState({id: Date.now()},()=>{
-            this.props.createEvent(this.state)
-        })
+        let currentTime = Date.now()
+        this.setState(
+            {id: currentTime},
+            ()=>{
+                this.props.createEvent(this.state)
+            }
+        )
     }
 
     render() {

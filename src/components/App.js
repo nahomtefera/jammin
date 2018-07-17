@@ -27,7 +27,7 @@ class App extends Component {
       // SignedUser
       authUser: null,
       // Create Event
-      creatingEvent: true,
+      creatingEvent: false,
       // Events
       events: [],
     }
@@ -106,21 +106,60 @@ class App extends Component {
     this.setState({creatingEvent: !this.state.creatingEvent})
   }
   // Adds event to firebase database
-  createEvent(event_info){
+  createEvent(event){
     // Add Firebase call to push event to database
     // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
-    // db.doCreateEvent(event_info.id, event_info.uid, event_info.title, event_info.location, event_info.date, event_info.time, event_info.description, event_info.imageURL)
+    db.doCreateEvent(event.id, event.uid, event.title, event.location, event.date, event.time, event.description, "")
+    .then(()=>{
+      // Send IMG file to method that will upload it to storage
+      this.uploadEventImg(event.uploadedImg, event.id)
+    })
     
     this.toggleCreateEventWindow();
-    // Send IMG file to method that will upload it to storage
-    this.uploadEventImg(event_info.uploadedImg, event_info.id)
   }
 
+  // Everytime a user creates an event, we will upload the image for that event
+  // Once the upload is succesfull we will add the url for that image to the corresponding event
   uploadEventImg(file, event_id) {
     // Create Storage Ref
     let storageRef = firebase.storage().ref('images/events/' + event_id)
     // Upload File
-    storageRef.put(file)
+    let uploadTask = storageRef.put(file)
+
+    let self = this;
+
+    // Method that will check the percentage of the upload
+    uploadTask.on('state_changed', function(snapshot){
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      self.setState({loading: "true"})
+
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log('Upload is running');
+          break;
+      }
+    }, function(error) {
+      // Handle unsuccessful uploads
+    }, function() {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log('File available at', downloadURL);
+        // Once the image is uploaded, We will update the event to add the imageURL
+        firebase.database().ref().child('/events/' + event_id)
+        .update({ imageURL: downloadURL})
+        .then(()=>{
+          // Reload page to be able to see the picture uploaded
+          window.location.reload()
+        })
+      });
+    });
   }
 
   render() {
