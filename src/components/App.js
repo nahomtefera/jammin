@@ -170,11 +170,19 @@ class App extends Component {
               return(
                 <div>
                   <Navbar authUser={this.state.authUser}/>
-                  {/* Show all events */}
-                  <EventResults {...props} events={this.state.events} />
+                  {/* Create Event Button */}
+                  <div className="create-event-button-container"> 
+                    <button onClick={this.toggleCreateEventWindow} className={this.state.creatingEvent 
+                      ? "hide" 
+                      : "toggle-create-event-window"}>Create Event</button>
+                  </div>
                   {/* Modal to Create Events */}
-                  {this.state.creatingEvent != false ? <CreateEvent {...props} toggleWindow={this.toggleCreateEventWindow} createEvent={this.createEvent} /> : ""}
-                  <button className={this.state.creatingEvent ? "hide" : "toggle-create-event-window"} onClick={this.toggleCreateEventWindow}>Open Create Event</button>
+                  {this.state.creatingEvent != false 
+                    ? <CreateEvent {...props} toggleWindow={this.toggleCreateEventWindow} createEvent={this.createEvent} /> 
+                    : ""
+                  }
+                  {/* S H O W    A L L    E V E N T S */}
+                  <EventResults {...props} events={this.state.events} />
                 </div>  
               )
             } 
