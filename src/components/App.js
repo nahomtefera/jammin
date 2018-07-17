@@ -52,6 +52,15 @@ class App extends Component {
           this.setState({
             authUser: true
           })
+          console.log('success')
+        },
+        signInFailure: function(error) {
+          // Some unrecoverable error occurred during sign-in.
+          // Return a promise when error handling is completed and FirebaseUI
+          // will reset, clearing any UI. This commonly occurs for error code
+          // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
+          // occurs. Check below for more details on this.
+          console.log(error)
         }
       }
     }

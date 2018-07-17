@@ -51,8 +51,8 @@
     overflow: hidden;
     background: white;
     vertical-align: top;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
-    box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.41);
+    -webkit-box-shadow: 0px 0px 37px 3px rgba(156, 156, 156, 0.22);
+    box-shadow: 0px 0px 37px 3px rgba(156, 156, 156, 0.22);
     cursor: pointer;
 }
 
@@ -62,22 +62,22 @@
     font-family: Lato;
     font-weight: 400;
     font-size: 1.5em;
-    color: white;
-    border-bottom: 2px solid #4181c3; 
-    background: #4181c3;
+    border-bottom: 2px solid #ececec; 
+    background: white;
     margin: 0;
     padding: 15px;
+    color: #3a3a3a;
 }
 
 .loading-page-info-box-item:hover {
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.81);
-    box-shadow: 0px 0px 10px 0px rgba(156, 156, 156, 0.81);
+    /* -webkit-box-shadow: 0px 0px 10px 0px rgba(183, 183, 183, 0.62);
+    box-shadow: 0px 0px 10px 0px rgba(183, 183, 183, 0.62); */
 }
 
 .loading-page-info-box-item:hover .box-item-title {
-    color: #4181c3;
-    background: white;
-    border-bottom: 2px solid #4182c3a2; 
+    color: white;
+    background: #ea5b2e;
+    border-bottom: 2px solid white; 
 }
 
 .box-item-description {
@@ -85,5 +85,6 @@
     font-family: Lato;
     font-weight: 300;
     font-size: 1.4em;
+    color: #5a5a5a;
     padding: 25px;
 }

@@ -52,6 +52,7 @@ svg {
     max-width: 90%;
     position: relative;
     z-index: 1;
+    padding-top: 50px;
 }
 
 .featured-events-item {
