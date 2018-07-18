@@ -168,28 +168,45 @@ class App extends Component {
 
   render() {
     // Loader
-    if (this.state.loading === 'true') {
-      return (
-        <div className="loader-container">
-          <h1 className="loader-text">Welcome!</h1>
-          <div className="loader">Loading...</div>
-        </div>
-      )
-    }
-    // Loading Event
-    if (this.state.loading === 'loading-event') {
-      return (
-        <div className="event-loader-container">
-          <h1 className="event-loader-text">Uploading Event . . .</h1>
-          <div className="event-loader">Loading...</div>
-        </div>
-      )
-    }
+    // if (this.state.loading === 'true') {
+    //   return (
+    //     <div className="loader-container">
+    //       <h1 className="loader-text">Welcome!</h1>
+    //       <div className="loader">Loading...</div>
+    //     </div>
+    //   )
+    // }
+    // // Loading Event
+    // if (this.state.loading === 'loading-event') {
+    //   return (
+    //     <div className="event-loader-container">
+    //       <h1 className="event-loader-text">Uploading Event . . .</h1>
+    //       <div className="event-loader">Loading...</div>
+    //     </div>
+    //   )
+    // }
     // App
     return (
       <BrowserRouter> 
         <div className="App">
 
+          {/* LOADERS */}
+            {/* Loader for intro */}
+          <div className={this.state.loading === 'true' ? "loader-container" : "hide"}>
+            <div className="loader-wrapper">
+              <h1 className="loader-text">Welcome!</h1>
+              <div className="loader">Loading...</div>
+            </div>
+            
+          </div>
+            {/* Loader for event creation */}
+          <div className={this.state.loading === 'loading-event'? "event-loader-container" : "hide"}>
+            <div className="loader-wrapper">
+              <h1 className="event-loader-text">Uploading Event . . .</h1>
+              <div className="event-loader">Loading...</div>
+            </div>
+            
+           </div>  
           {/* Main Page that users and guests will see without signing-in */}
           <Route
             

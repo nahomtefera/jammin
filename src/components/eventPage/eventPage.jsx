@@ -9,12 +9,19 @@ class EventPage extends Component {
         super(props);
         
         this.state = {
+            loading: "true",
             event: {},
             event_owner: {}
         }
     }
 
     componentWillMount(){
+        //loader will appear everytime we open a new event page
+        let self = this;
+        setTimeout(function(){ 
+            self.setState({loading:false})
+        }, 1500);
+
         let event_id = this.props.props.match.params.id; {/* Event ID*/}
         let event_info = {}
         let user_info = {}
@@ -47,6 +54,19 @@ class EventPage extends Component {
         return(
             <div className="event-page">
             
+                <div className={this.state.loading === 'true' ? "loader-event-page-container" : "hide"}>
+
+                    <div className="loader-event-wrapper">
+                        <h1 className="loader-event-text">
+                            <span className="loader-event-title">{this.state.event.title} </span>
+                            at
+                            <span className="loader-event-location"> {this.state.event.location}</span>
+                        </h1>
+                        <div className="loader-event-page">Loading...</div>
+                    </div>
+
+                </div>
+
                 <div className="event-page-background"></div>
 
                 <div className="event-page-container">
