@@ -33,7 +33,6 @@ class App extends Component {
     }
     // Config for firebaseAuthUi - Authentification
     this.uiConfig = {
-      signInFlow: "popup",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -60,9 +59,10 @@ class App extends Component {
           // will reset, clearing any UI. This commonly occurs for error code
           // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
           // occurs. Check below for more details on this.
-          console.log(error)
+          alert(error)
         }
-      }
+      },
+      signInFlow: "redirect"
     }
     // Create Event - Add to Database
     this.createEvent = this.createEvent.bind(this);
@@ -111,8 +111,12 @@ class App extends Component {
     // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
     db.doCreateEvent(event.id, event.uid, event.title, event.location, event.date, event.time, event.description, "")
     .then(()=>{
+      // If the user doesn't upload a picture, let's refresh
+      if(event.uploadedImg === false) {
+        window.location.reload()
+      }
       // Send IMG file to method that will upload it to storage
-      this.uploadEventImg(event.uploadedImg, event.id)
+      this.uploadEventImg(event.uploadedImg, event.id);
     })
     // Close create event modal
     this.toggleCreateEventWindow();
@@ -127,14 +131,13 @@ class App extends Component {
     let uploadTask = storageRef.put(file)
 
     let self = this;
-
+    console.log(file)
     // Method that will check the percentage of the upload
     uploadTask.on('state_changed', function(snapshot){
       // Observe state change events such as progress, pause, and resume
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       self.setState({loading: "loading-event"})
-
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'

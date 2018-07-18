@@ -44,7 +44,7 @@ svg {
 
 .featured-events {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     width: 1600px;
     box-sizing: border-box;

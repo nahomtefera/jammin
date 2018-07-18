@@ -37,20 +37,21 @@ class Event extends Component {
                 </div>
                 
                 <div className="event-card-image-info-container">
-                    <div className="event-card-image">
+                    {/* We will leave the Event image out for now */}
+                    {/* <div className="event-card-image">
                         <img className="event-card-image-item" src={this.props.eventInfo.imageURL != "" ? `${this.props.eventInfo.imageURL}` : "https://cdn2.iconfinder.com/data/icons/xomo-basics/128/document-06-512.png"} alt="event pic"/>
-                    </div>
+                    </div> */}
 
                     <div className="event-card-info-container">
                         <ul className="event-card-info-list">
-                            <li><span className="event-info-item">{this.props.eventInfo.title}</span> at <span className="event-info-item">{this.props.eventInfo.location}</span></li>
-                            <li><span className="event-info-item">{this.props.eventInfo.date}</span></li>
-                            <li><span className="event-info-item">{this.props.eventInfo.time}</span></li>
+                            <li><span className="event-info-item event-title">{this.props.eventInfo.title}</span> at <span className="event-info-item">{this.props.eventInfo.location}</span></li>
+                            <li><span className="event-info-item event-date">{this.props.eventInfo.date}</span></li>
+                            <li><span className="event-info-item event-time">{this.props.eventInfo.time}</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <p className="event-card-description-container">{this.props.eventInfo.description}</p>
+                {/* <p className="event-card-description-container">{this.props.eventInfo.description}</p> */}
 
             </div>
         )

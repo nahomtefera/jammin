@@ -15,6 +15,7 @@
   width: 1000px;
   max-width: 95%;
   margin: 0 auto;
+  text-align: right;
 }
 
 .toggle-create-event-window{
@@ -29,9 +30,8 @@
   text-transform: uppercase;
   cursor: pointer;
   outline: none;
-  float: right;
-    margin: 20px;
-    margin-right: 0;
+  margin: 20px;
+  margin-right: 12px;
 }
 
 .toggle-create-event-window:hover {

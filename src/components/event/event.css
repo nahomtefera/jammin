@@ -1,7 +1,7 @@
 .event-card-container {
     width: 600px;
     margin: 30px auto;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
     max-width: 85%;
     box-sizing: border-box;
     background: white;
@@ -41,11 +41,11 @@
     width: 200px;
     height: 200px;
     display: inline-block;
+    overflow: hidden;
 }
 
 .event-card-image-item {
-    max-width: 200px;
-    max-height: 200px;
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -65,12 +65,14 @@
 }
 
 .event-info-item {
-    font-weight: bold;
+    font-family: Lato;
     color: #323232;
 }
 
 .event-card-description-container {
+    max-width: 100%;
     width: 400px;
+    box-sizing: border-box;
     padding: 20px;
     padding-bottom: 30px;
     margin: 4px auto;
