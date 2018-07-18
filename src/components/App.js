@@ -6,6 +6,7 @@ import Account from './account/account';
 import EventResults from './eventResults/eventResults';
 import CreateEvent from './createEvent/createEvent';
 import LandingPage from './landingPage/landingPage';
+import EventPage from './eventPage/eventPage';
 // React-router
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 // Firebase 
@@ -245,6 +246,24 @@ class App extends Component {
                   }
                   {/* S H O W    A L L    E V E N T S */}
                   <EventResults {...props} events={this.state.events} />
+                </div>  
+              )
+            } 
+          }/>
+
+          {/* Event Route that will display all information for selected events */}
+          <Route
+            exact path="/event/:id"
+            render={(props) => {
+              // If user has NOT signed-in
+              // Going to /home page will redirect to landing page
+              if (this.state.authUser === null) {
+                return <Redirect to='/' />
+              }
+              return(
+                <div>
+                  <Navbar authUser={this.state.authUser}/>
+                  <EventPage />
                 </div>  
               )
             } 
