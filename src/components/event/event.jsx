@@ -52,7 +52,11 @@ class Event extends Component {
                 </div>
 
                 {/* <p className="event-card-description-container">{this.props.eventInfo.description}</p> */}
-
+                <div className="event-card-handlers">
+                    <div className="event-card-handler-icon love-icon"></div>
+                    <div className="event-card-handler-icon join-icon"></div>
+                    <div className="view-full-event">Open Event</div>
+                </div>
             </div>
         )
     }

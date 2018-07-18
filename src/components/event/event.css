@@ -9,6 +9,11 @@
     box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.1);
 }
 
+.event-card-container:hover {
+    -webkit-box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.15);
+    box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.15);
+}
+
 .event-card-owner-info {
     padding: 14px 30px;
     border-bottom: 1px solid #f7f7f7;
@@ -77,4 +82,64 @@
     padding-bottom: 30px;
     margin: 4px auto;
     border: 1px solid #fafafa;
+}
+
+.event-card-handlers {
+    padding: 0 40px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.event-card-handler-icon {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.love-icon {
+    background: url(https://goo.gl/vufYvj);
+    background-size: auto 100%;
+    background-position: bottom;
+}
+
+.love-icon:hover {
+    background: url(https://goo.gl/tKdVFq);
+    background-size: auto 100%;
+    background-position: bottom;
+}
+
+.join-icon {
+    background: url(https://goo.gl/zzUucn);
+    background-size: auto 100%;
+    background-position: bottom;
+}
+
+.join-icon:hover {
+    background: url(https://goo.gl/khnEvf);
+    background-size: auto 100%;
+    background-position: bottom;
+}
+
+.view-full-event {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: auto;
+    border: none;
+    background: none;
+    color: #f15c5c;
+    border-radius: 4px;
+    padding: 5px;
+    font-family: Lato;
+    font-size: .9em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+}
+
+.view-full-event:hover {
+    color: #29a75e;
 }
