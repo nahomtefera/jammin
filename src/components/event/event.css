@@ -124,6 +124,10 @@
 }
 
 .view-full-event {
+    margin-left: auto;
+}
+
+.view-full-event a{
     display: inline-block;
     cursor: pointer;
     margin-left: auto;
@@ -137,9 +141,14 @@
     font-weight: 400;
     letter-spacing: 1px;
     cursor: pointer;
+    text-decoration: none;
     outline: none;
 }
 
-.view-full-event:hover {
+.view-full-event a:visited {
+    color: #f15c5c;
+}
+
+.view-full-event a:hover {
     color: #29a75e;
 }

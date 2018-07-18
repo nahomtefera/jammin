@@ -24,6 +24,7 @@ import { db } from '../firebase';
   // Create Events
   export const doCreateEvent = (id, uid, title, location, date, time, description, imageURL) =>
   db.ref(`events/${id}`).set({
+    id,
     uid,
     title,
     location,

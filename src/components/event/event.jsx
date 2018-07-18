@@ -3,6 +3,7 @@ import './event.css';
 import firebase from 'firebase/app';
 import '../firebase/';
 import { db } from '../firebase/';
+import {Link} from 'react-router-dom';
 
     
 // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
@@ -55,7 +56,7 @@ class Event extends Component {
                 <div className="event-card-handlers">
                     <div className="event-card-handler-icon love-icon"></div>
                     <div className="event-card-handler-icon join-icon"></div>
-                    <div className="view-full-event">Open Event</div>
+                    <div className="view-full-event"><Link to={`/event/${this.props.eventInfo.id}`}>Open Event</Link></div>
                 </div>
             </div>
         )
