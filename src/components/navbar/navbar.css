@@ -1,6 +1,7 @@
 .navbar-container {
     border-bottom: 1px solid #efefef;
     overflow: auto;
+    background: #fff;
 }
 
 .navbar-list-container {
@@ -98,5 +99,24 @@
 }
 
 .navbar-container-landing-page .sign-out-button a{
+    color: #f15c5c!important;
+}
+
+/* If Navbar is in an event page link colors will be different */
+
+.navbar-container-event-page {
+    border: none;
+    background: none;
+}
+
+.navbar-container-event-page li a {
+    color: white!important
+}
+
+.navbar-container-event-page .sign-in-button a{
+    color: #29a75e!important;
+}
+
+.navbar-container-event-page .sign-out-button a{
     color: #f15c5c!important;
 }

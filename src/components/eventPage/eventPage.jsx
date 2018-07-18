@@ -42,16 +42,36 @@ class EventPage extends Component {
 
     }
     render(){
-        console.log(this.state)
         // event: date, description, id, imageURL, location, time, title, uid
         // user: name, username, photoURL
         return(
-            <div className="event-page-container">
-                {this.state.event.title} <br/>
-                {this.state.event.location} <br/>
-                {this.state.event.date} <br/>
-                {this.state.event.time} <br/>
-                {this.state.event_owner.name} <br/>
+            <div className="event-page">
+            
+                <div className="event-page-background"></div>
+
+                <div className="event-page-container">
+                    <div className="event-page-header">
+                        <span className="event-page-header-title">{this.state.event.title} </span>
+                        at
+                        <span className="event-page-header-location"> {this.state.event.location}</span>
+                    </div>
+
+                    <div className="event-info">
+                        
+                        <div className="event-date">{this.state.event.date}</div>
+                        <div className="event-time">{this.state.event.time}</div>
+
+                        <div className="event-description">
+                            <span className="event-description-title">Description</span>
+                            <p className="event-description-text">{this.state.event.description}</p>
+                        </div>
+                    </div>
+
+                    <div className="event-user-info">
+                        <div className="user-name">{this.state.event_owner.name}</div>
+                    </div>
+                </div>
+
             </div>
         )
     }

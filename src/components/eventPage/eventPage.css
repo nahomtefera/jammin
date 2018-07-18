@@ -1,0 +1,70 @@
+.event-page-background {
+    width: 100%;
+    height: 650px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fafafa;
+    z-index: -1;
+    border-bottom: 1px solid #ececec;
+    background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url(https://goo.gl/nRpQTv);
+    background-size: cover;
+    background-position: bottom;
+}
+
+
+.event-page-container {
+    width: 1100px;
+    min-height: 800px;
+    margin: 2em auto;
+    /* -webkit-box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.1);
+    box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.1); */
+    border: 1px solid #e9e9eb;
+    box-sizing: border-box;
+    font-family: Lato;
+    background: #fff;
+}
+
+.event-info {
+    padding: 50px 95px;
+}
+
+.event-page-header {
+    font-size: 1.2em;
+    color: #2f2f2f;
+    border-bottom: 1px solid #e9e9eb;
+    background: #fafafa;
+    padding: 35px 95px;
+}
+
+.event-page-header-title, .event-page-header-location {
+    font-size: 1.4em;
+}
+
+.event-location, .event-date, .event-time {
+    font-weight: 400;
+    color: #454545;
+}
+
+.event-description {
+    width: 400px;
+    box-sizing: border-box;
+    margin: 30px 0;
+    white-space: pre-line;
+}
+
+.event-description-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.event-description-text {
+    color: #3a3a3a;
+    font-size: 0.9em;
+}
+
+.event-user-info {
+    padding: 0 95px;
+}
