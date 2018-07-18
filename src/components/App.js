@@ -253,7 +253,7 @@ class App extends Component {
 
           {/* Event Route that will display all information for selected events */}
           <Route
-            exact path="/event/:id"
+            path="/event/:id"
             render={(props) => {
               // If user has NOT signed-in
               // Going to /home page will redirect to landing page
@@ -263,7 +263,7 @@ class App extends Component {
               return(
                 <div>
                   <Navbar authUser={this.state.authUser}/>
-                  <EventPage />
+                  <EventPage props={props}/>
                 </div>  
               )
             } 
