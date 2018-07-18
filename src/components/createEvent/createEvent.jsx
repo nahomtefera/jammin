@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './createEvent.css';
 import firebase from 'firebase/app';
 import '../firebase/';
-import { db } from '../firebase/';
 
 class CreateEvent extends Component {
     constructor(props){

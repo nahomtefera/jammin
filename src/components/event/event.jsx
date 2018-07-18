@@ -33,7 +33,7 @@ class Event extends Component {
         return (
             <div className="event-card-container">
                 <div className="event-card-owner-info">
-                    <img className="event-card-owner-img" src={this.state.event_owner.photoURL} alt="profile pic"/>
+                    <img className="event-card-owner-img" src={this.state.event_owner.photoURL != null ? this.state.event_owner.photoURL : "https://goo.gl/cJ1cte"} alt="profile pic"/>
                     <span className="event-card-owner-name">{this.state.event_owner.name}</span>
                 </div>
                 

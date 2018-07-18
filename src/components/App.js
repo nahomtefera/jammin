@@ -167,24 +167,6 @@ class App extends Component {
   }
 
   render() {
-    // Loader
-    // if (this.state.loading === 'true') {
-    //   return (
-    //     <div className="loader-container">
-    //       <h1 className="loader-text">Welcome!</h1>
-    //       <div className="loader">Loading...</div>
-    //     </div>
-    //   )
-    // }
-    // // Loading Event
-    // if (this.state.loading === 'loading-event') {
-    //   return (
-    //     <div className="event-loader-container">
-    //       <h1 className="event-loader-text">Uploading Event . . .</h1>
-    //       <div className="event-loader">Loading...</div>
-    //     </div>
-    //   )
-    // }
     // App
     return (
       <BrowserRouter> 
@@ -240,7 +222,7 @@ class App extends Component {
 
           {/* Home page that would appear when a user signs-in */}
           <Route
-            exact path="/home"
+            exact path="/events"
             render={(props) => {
               // If user has NOT signed-in
               // Going to /home page will redirect to landing page

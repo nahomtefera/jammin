@@ -22,8 +22,8 @@ class Navbar extends Component {
                 {
                     this.props.authUser ? 
                         <ul className="navbar-list-container">
-                            <li className="navbar-list-item" ><Link to="/">Landing Page</Link></li>
-                            <li className="navbar-list-item" ><Link to="/home">Home</Link></li>
+                            <li className="navbar-list-item" ><Link to="/">Home</Link></li>
+                            <li className="navbar-list-item" ><Link to="/events">Events</Link></li>
                             <li className="navbar-list-item" ><Link to="/account">Account</Link></li>
                             <li className="navbar-list-item sign-out-button" ><SignOutButton /></li>
                         </ul>
