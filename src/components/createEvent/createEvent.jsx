@@ -128,6 +128,7 @@ class CreateEvent extends Component {
                                 <DatePicker
                                     className="create-event-modal-info-input"
                                     readOnly={true}
+                                    minDate={moment()}
                                     selected={this.state.startDate}
                                     onChange={this.handleDateChange}
                                 />

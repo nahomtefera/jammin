@@ -27,7 +27,7 @@ class App extends Component {
       loading: "true",
       // SignedUser
       authUser: null,
-      // Create Event
+      // Is User Creating Event
       creatingEvent: false,
       // Events
       events: [],
@@ -44,7 +44,7 @@ class App extends Component {
       callbacks: {
         signInSuccessWithAuthResult: (data) => {
           // If the user signing-in is a new user
-          // We will create add them to the firebase database
+          // We will add them to the firebase database
           if(data.additionalUserInfo.isNewUser === true) {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
           } 
@@ -52,7 +52,6 @@ class App extends Component {
           this.setState({
             authUser: true
           })
-          console.log('success')
         },
         signInFailure: function(error) {
           // Some unrecoverable error occurred during sign-in.
