@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
 import './createEvent.css';
+// Firebase
 import firebase from 'firebase/app';
 import '../firebase/';
+// Datepicker
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 class CreateEvent extends Component {
     constructor(props){
@@ -16,12 +22,14 @@ class CreateEvent extends Component {
             date: "",
             time: "",
             description: "",
-            uploadedImg: false,           
+            uploadedImg: false,
+            startDate: moment()           
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputFileChange = this.handleInputFileChange.bind(this);
         this.createEvent = this.createEvent.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this)
     }
 
     handleInputChange(el) {
@@ -40,6 +48,12 @@ class CreateEvent extends Component {
             uploadedImg: file,
             imageURL: URL.createObjectURL(file)
         })
+    }
+
+    handleDateChange(date) {
+        this.setState({
+            startDate: date
+        });
     }
 
     createEvent() {
