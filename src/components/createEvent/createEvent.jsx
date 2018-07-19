@@ -23,13 +23,15 @@ class CreateEvent extends Component {
             time: "",
             description: "",
             uploadedImg: false,
-            startDate: moment()           
+            startDate: moment(),
+            startTime: moment(),
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputFileChange = this.handleInputFileChange.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this)
+        this.handleTimeChange = this.handleTimeChange.bind(this)
     }
 
     handleInputChange(el) {
@@ -51,8 +53,20 @@ class CreateEvent extends Component {
     }
 
     handleDateChange(date) {
+        let formatDate = date.format("dddd, MMMM Do YYYY");
+
         this.setState({
-            startDate: date
+            startDate: date,
+            date: formatDate
+        });
+    }
+
+    handleTimeChange(time) {
+        let formatTime = time.format("h:mm A") 
+
+        this.setState({
+            startTime: time,
+            time: formatTime
         });
     }
 
@@ -111,12 +125,28 @@ class CreateEvent extends Component {
                             
                             <div className="create-event-modal-info-field">
                                 <div className="create-event-modal-info-label" htmlFor="date">Date</div>
-                                <input className="create-event-modal-info-input" name="date" value={this.state.date} onChange={this.handleInputChange} type="text"/>
+                                <DatePicker
+                                    className="create-event-modal-info-input"
+                                    readOnly={true}
+                                    selected={this.state.startDate}
+                                    onChange={this.handleDateChange}
+                                />
                             </div>                                
                             
                             <div className="create-event-modal-info-field">
                                 <div className="create-event-modal-info-label" htmlFor="time">Time</div>
-                                <input className="create-event-modal-info-input" name="time" value={this.state.time} onChange={this.handleInputChange} type="text"/>
+                                {/* <input className="create-event-modal-info-input" name="time" value={this.state.time} onChange={this.handleInputChange} type="text"/> */}
+                                <DatePicker
+                                    className="create-event-modal-info-input"
+                                    readOnly={true}
+                                    selected={this.state.startTime}
+                                    onChange={this.handleTimeChange}
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={15}
+                                    dateFormat="LT"
+                                    timeCaption="Time"
+                                />
                             </div>
 
                         </div>

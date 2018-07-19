@@ -87,6 +87,19 @@ input[type="file"] {
     margin-bottom: 15px;
 }
 
+.create-event-modal-info-field div:last-child {
+    display: inline-block;
+}
+
+.create-event-modal-info-field ul{
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.date-picker-time {
+
+}
+
 .create-event-modal-info-label {
     width: 110px;
     display: inline-block;

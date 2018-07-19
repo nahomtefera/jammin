@@ -236,7 +236,7 @@ class App extends Component {
                   <div className="create-event-button-container"> 
                     <button onClick={this.toggleCreateEventWindow} className={this.state.creatingEvent 
                       ? "hide" 
-                      : "toggle-create-event-window"}>Create Event</button>
+                      : "toggle-create-event-window"}>Event +</button>
                   </div>
                   {/* Modal to Create Events */}
                   {this.state.creatingEvent != false 
