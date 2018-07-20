@@ -15,8 +15,12 @@ class Event extends Component {
         super(props);
 
         this.state = {
-            event_owner: {}
+            event_owner: {},
+            eventJoined: "false"
         }
+
+        this.joinEvent = this.joinEvent.bind(this);
+        this.leaveEvent = this.leaveEvent.bind(this);
     }
 
     componentWillMount(){
@@ -27,6 +31,14 @@ class Event extends Component {
             this.setState({event_owner: snap.val()})
         });
 
+    }
+
+    joinEvent(){
+        this.setState({eventJoined: "true"})
+    }
+
+    leaveEvent(){
+        this.setState({eventJoined: "false"})
     }
 
     render() {
@@ -56,8 +68,12 @@ class Event extends Component {
 
                 {/* <p className="event-card-description-container">{this.props.eventInfo.description}</p> */}
                 <div className="event-card-handlers">
-                    <div className="event-card-handler-icon love-icon"></div>
-                    <div className="event-card-handler-icon join-icon"></div>
+
+                    {this.state.eventJoined == "false" 
+                        ? <div className="event-card-handler-icon join-event" onClick={this.joinEvent}>Join Event</div>
+                        : <div className="event-card-handler-icon leave-event" onClick={this.leaveEvent}>Leave Event</div>
+                    }
+
                     <div className="view-full-event"><Link to={`/event/${this.props.eventInfo.id}`}>Open Event</Link></div>
                 </div>
             </div>

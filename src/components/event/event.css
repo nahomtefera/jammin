@@ -108,11 +108,24 @@
 }
 
 .event-card-handler-icon {
-    width: 25px;
-    height: 25px;
     margin: 0 10px;
     cursor: pointer;
     display: inline-block;
+    /* border: 1px solid #eee; */
+    padding: 4px 14px;
+    font-family: Lato;
+}
+
+.join-event {
+    color: #66bb69;
+}
+
+.join-event:hover {
+    color: #3e8041;
+}
+
+.leave-event {
+    color: #f35a5a;
 }
 
 .love-icon {
