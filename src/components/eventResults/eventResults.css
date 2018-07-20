@@ -24,20 +24,21 @@
 .events-filter-container {
     display: inline-block;
     vertical-align: top;
+    margin-top: 3em;
 }
 
 .events-filter-list {
     text-align: left;
     list-style: none;
     padding: 0;
-    border: 1px solid #cfcfcf;
+    border: 1px solid #eaeaea;
     border-left: none;
 }
 
 .events-filter-list-item {
     padding: 8px 65px 8px 15px;
-    border-bottom: 1px solid #cfcfcf;
-    border-left: 4px solid #cfcfcf;
+    border-bottom: 1px solid #eaeaea;
+    border-left: 4px solid #eaeaea;
     cursor: pointer;
     font-family: Lato;
     font-size: 15px;
@@ -48,7 +49,7 @@
 
 .events-filter-list-item:hover {
     color: #414141;
-    border-left-color: #868686;
+    border-left-color: #dadada;
 }
 
 .events-filter-list-item:last-child {

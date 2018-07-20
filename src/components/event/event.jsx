@@ -42,12 +42,14 @@ class Event extends Component {
                     {/* <div className="event-card-image">
                         <img className="event-card-image-item" src={this.props.eventInfo.imageURL != "" ? `${this.props.eventInfo.imageURL}` : "https://cdn2.iconfinder.com/data/icons/xomo-basics/128/document-06-512.png"} alt="event pic"/>
                     </div> */}
-
+                    <div className="event-card-time">
+                        <span className="">{this.props.eventInfo.time}</span>
+                    </div>
                     <div className="event-card-info-container">
                         <ul className="event-card-info-list">
                             <li><span className="event-info-item event-title">{this.props.eventInfo.title}</span> at <span className="event-info-item">{this.props.eventInfo.location}</span></li>
                             <li><span className="event-info-item event-date">{this.props.eventInfo.date}</span></li>
-                            <li><span className="event-info-item event-time">{this.props.eventInfo.time}</span></li>
+                            {/* <li></li> */}
                         </ul>
                     </div>
                 </div>
