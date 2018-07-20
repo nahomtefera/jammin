@@ -23,6 +23,11 @@
     cursor: pointer;
 }
 
+.create-event-modal-container {
+    position: relative;
+    z-index: 1;
+}
+
 .create-event-modal-content {
     max-width: 90%;
     width: 700px;

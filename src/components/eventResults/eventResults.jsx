@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import Event from '../event/event';
+import './eventResults.css'
+// Datepicker
+import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import './eventResults.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class EventResults extends Component {
 
@@ -11,10 +14,13 @@ class EventResults extends Component {
         this.state = {
             allEvents: [],
             eventsToday: [],
-            showEvents: "show-all-events"
+            chosenDateEvents: [],
+            showEvents: "show-all-events",
+            startDate: moment()
         }
 
         this.changeFilter = this.changeFilter.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     componentWillMount(){
@@ -44,6 +50,25 @@ class EventResults extends Component {
         })
     }
 
+    handleDateChange(date) {
+        let chosenDate = date.format("dddd, MMMM DD YYYY");
+        let chosenDateEvents = []
+
+        this.state.allEvents.map((event)=> {
+            let date = event.date;
+
+            if(date == chosenDate) {
+                chosenDateEvents.push(event)
+            }
+        })
+
+        this.setState({
+            startDate: date,
+            showEvents: "chosen-date",
+            chosenDateEvents: chosenDateEvents
+        });
+    }
+
     render() {
         return (
             <div className="event-results-container">
@@ -51,11 +76,14 @@ class EventResults extends Component {
                 <div className="event-results">
                     {/* Title of the type of events showing (all events, events today, etc) */}
                     {
-                        this.state.showEvents === "show-all-events" ?
-                            <span className="events-showing-title">All Events</span>
-                            : this.state.showEvents === "show-events-today" ?
-                                <span className="events-showing-title">{moment().format("dddd, MMMM DD YYYY")}</span>
-                                : null
+                        this.state.showEvents === "show-all-events" 
+                            ? <span className="events-showing-title">All Events</span>
+                            : this.state.showEvents === "show-events-today" 
+                                ? <span className="events-showing-title">Today</span>
+                                : this.state.showEvents === "chosen-date" 
+                                    ? <span className="events-showing-title">{this.state.startDate.format("dddd, MMMM DD YYYY")}</span>
+                                    : null
+
                     }
                     {
                         this.state.showEvents === "show-all-events" 
@@ -76,7 +104,16 @@ class EventResults extends Component {
                                 })
                                 :   <div className="no-events"> No events today, why don't you create one?</div>
 
-                            : <div className="no-events"> You didn't join any event, join one and it will show here.</div>
+                            : this.state.showEvents === "chosen-date"
+                                ? this.state.chosenDateEvents.length != 0
+                                    ? this.state.chosenDateEvents.map((event, index) => {
+                                        return (
+                                            <Event key={index} eventInfo={event} />
+                                        )
+                                    })
+                                    :<div className="no-events"> There are no events this date, why don't you create one?</div>
+
+                                :<div className="no-events"> You didn't join any event, join one and it will show here.</div>
                     }
                 </div>
 
@@ -104,6 +141,16 @@ class EventResults extends Component {
                                 : "events-filter-list-item"}>My events
                         </li>
                     </ul>
+
+                    {/* DatePicker */}
+                    <DatePicker
+                        // className="create-event-modal-info-input"
+                        inline
+                        readOnly={true}
+                        minDate={moment()}
+                        selected={this.state.startDate}
+                        onChange={this.handleDateChange}
+                    />
                 </div>
             </div>
         )
