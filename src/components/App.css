@@ -208,3 +208,24 @@ body {
     height: 5em;
   }
 }
+
+
+/* SLIDE ANIMATIONS */
+
+@-webkit-keyframes slideLeft{
+  from{
+      left:-300px;opacity:0
+  } 
+  to{
+      left:0;opacity:1
+  }
+}
+
+@keyframes slideLeft{
+  from{
+      left:-300px;opacity:0
+  } 
+  to{
+      left:0;opacity:1
+  }
+}

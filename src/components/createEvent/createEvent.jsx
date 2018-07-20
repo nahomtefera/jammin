@@ -53,7 +53,7 @@ class CreateEvent extends Component {
     }
 
     handleDateChange(date) {
-        let formatDate = date.format("dddd, MMMM Do YYYY");
+        let formatDate = date.format("dddd, MMMM DD YYYY");
 
         this.setState({
             startDate: date,
