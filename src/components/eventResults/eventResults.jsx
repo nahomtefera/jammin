@@ -39,7 +39,7 @@ class EventResults extends Component {
         });
 
         this.setState({allEvents: allEvents, eventsToday: eventsToday})
-        console.log(moment().unix())
+        // console.log(moment().unix())
     }
 
     changeFilter(el){
