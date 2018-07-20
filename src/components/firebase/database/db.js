@@ -22,7 +22,7 @@ import { db } from '../firebase';
 // Events
 
   // Create Events
-  export const doCreateEvent = (id, uid, title, location, date, time, description, imageURL) =>
+  export const doCreateEvent = (id, uid, title, location, date, time, description, imageURL, members) =>
   db.ref(`events/${id}`).set({
     id,
     uid,
@@ -31,7 +31,8 @@ import { db } from '../firebase';
     date,
     time,
     description,
-    imageURL
+    imageURL,
+    members: members
   });
 
   // Get all Events

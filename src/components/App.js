@@ -108,8 +108,8 @@ class App extends Component {
   // Adds event to firebase database
   createEvent(event){
     // Add Firebase call to push event to database
-    // doCreateEvent = (id, uid, title, location, date, time, description, imageURL)
-    db.doCreateEvent(event.id, event.uid, event.title, event.location, event.date, event.time, event.description, "")
+    // doCreateEvent = (id, uid, title, location, date, time, description, imageURL, members)
+    db.doCreateEvent(event.id, event.uid, event.title, event.location, event.date, event.time, event.description, "", [""])
     .then(()=>{
       // If the user doesn't upload a picture, let's refresh
       if(event.uploadedImg === false) {

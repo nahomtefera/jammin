@@ -24,11 +24,25 @@ class Event extends Component {
     }
 
     componentWillMount(){
-        let new_event_owner;
+        let event_owner;
+        let currentUserId = firebase.auth().currentUser;
 
         firebase.database().ref(`users/${this.props.eventInfo.uid}`).once('value').then(snap=>{
             // console.log(snap.val())
-            this.setState({event_owner: snap.val()})
+            event_owner = snap.val()
+        }).then(()=>{
+            this.props.eventInfo.members != undefined 
+                ? this.props.eventInfo.members.map(member => {
+                    if(member === currentUserId) {
+                        this.setState ({
+                            event_owner: event_owner,
+                            eventJoined: "true"
+                        })
+                    }
+                })
+                : this.setState ({
+                    event_owner: event_owner
+                })
         });
 
     }
