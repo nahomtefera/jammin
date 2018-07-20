@@ -49,6 +49,14 @@ class EventResults extends Component {
             <div className="event-results-container">
                 {/* loop through events passed as props and render every event */}
                 <div className="event-results">
+                    {/* Title of the type of events showing (all events, events today, etc) */}
+                    {
+                        this.state.showEvents === "show-all-events" ?
+                            <span className="events-showing-title">All Events</span>
+                            : this.state.showEvents === "show-events-today" ?
+                                <span className="events-showing-title">{moment().format("dddd, MMMM DD YYYY")}</span>
+                                : null
+                    }
                     {
                         this.state.showEvents === "show-all-events" 
                             ? this.state.allEvents.map((event, index) => {
@@ -65,6 +73,8 @@ class EventResults extends Component {
                             : null
                     }
                 </div>
+
+                {/* Depending on the filter chosen we will display different(all events, events today, etc) */}
                 <div className="events-filter-container">
                     <ul className="events-filter-list">
                         <li onClick={this.changeFilter} 

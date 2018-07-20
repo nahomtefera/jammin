@@ -81,10 +81,10 @@ body {
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: 0.65em solid rgba(3, 169, 244, 0.9);
-  border-right: 0.65em solid rgba(3, 169, 244, 0.9);
-  border-bottom: 0.65em solid rgba(3, 169, 244, 0.9);
-  border-left: 0.65em solid #fff;
+  border-top: 0.25em solid rgba(100, 100, 100, 0.9);
+  border-right: 0.25em solid rgba(100, 100, 100, 0.9);
+  border-bottom: 0.25em solid rgba(100, 100, 100, 0.9);
+  border-left: 0.25em solid #fff;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

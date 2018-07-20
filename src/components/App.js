@@ -175,7 +175,7 @@ class App extends Component {
             {/* Loader for intro */}
           <div className={this.state.loading === 'true' ? "loader-container" : "hide"}>
             <div className="loader-wrapper">
-              <h1 className="loader-text">Welcome!</h1>
+              <h1 className="loader-text"></h1>
               <div className="loader">Loading...</div>
             </div>
             
