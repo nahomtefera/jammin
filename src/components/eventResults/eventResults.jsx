@@ -59,18 +59,24 @@ class EventResults extends Component {
                     }
                     {
                         this.state.showEvents === "show-all-events" 
-                            ? this.state.allEvents.map((event, index) => {
-                                return (
-                                    <Event key={index} eventInfo={event} />
-                                )
-                            })
+                            ? this.state.allEvents.length != 0 
+                                ? this.state.allEvents.map((event, index) => {
+                                    return (
+                                        <Event key={index} eventInfo={event} />
+                                    )
+                                })
+                                :   <div className="no-events">No events, why don't you create one?</div>
+
                         : this.state.showEvents === "show-events-today"
-                            ? this.state.eventsToday.map((event, index) => {
-                                return (
-                                    <Event key={index} eventInfo={event} />
-                                )
-                            })
-                            : null
+                            ? this.state.eventsToday.length != 0 
+                                ? this.state.eventsToday.map((event, index) => {
+                                    return (
+                                        <Event key={index} eventInfo={event} />
+                                    )
+                                })
+                                :   <div className="no-events"> No events today, why don't you create one?</div>
+
+                            : <div className="no-events"> You didn't join any event, join one and it will show here.</div>
                     }
                 </div>
 
