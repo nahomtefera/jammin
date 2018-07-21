@@ -44,7 +44,6 @@ class CreateEvent extends Component {
     }
 
     handleInputFileChange(el) {
-        let target = el.target;
         let file = el.target.files[0]
         this.setState({
             uploadedImg: file,
@@ -98,7 +97,7 @@ class CreateEvent extends Component {
 
                         <div className="create-event-modal-image-container">
                             <div className="create-event-modal-image">
-                                {this.state.imageURL != false ?
+                                {this.state.imageURL !== false ?
                                     <img className="event-img-item" src={this.state.imageURL}  alt="event pic"/>
                                     : ""
                                 }

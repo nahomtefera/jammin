@@ -33,13 +33,12 @@ class EventResults extends Component {
 
             allEvents.push(event);
 
-            if(date == today) {
+            if(date === today) {
                 eventsToday.push(event)
             }
         });
 
         this.setState({allEvents: allEvents, eventsToday: eventsToday})
-        // console.log(moment().unix())
     }
 
     changeFilter(el){
@@ -89,7 +88,7 @@ class EventResults extends Component {
                     {   
                         // ALL Events
                         this.state.showEvents === "show-all-events" 
-                            ? this.state.allEvents.length != 0 
+                            ? this.state.allEvents.length !== 0 
                                 ? this.state.allEvents.map((event, index) => {
                                     return (
                                         <Event key={event.id} eventInfo={event} />
@@ -100,7 +99,7 @@ class EventResults extends Component {
 
                             // Events happening TODAY
                             : this.state.showEvents === "show-events-today"
-                                ? this.state.eventsToday.length != 0 
+                                ? this.state.eventsToday.length !== 0 
                                     ? this.state.eventsToday.map((event, index) => {
                                         return (
                                             <Event key={event.id} eventInfo={event} />
@@ -111,7 +110,7 @@ class EventResults extends Component {
 
                                 // Events happening on SPECIFIC DATE
                                 : this.state.showEvents === "chosen-date"
-                                    ? this.state.chosenDateEvents.length != 0
+                                    ? this.state.chosenDateEvents.length !== 0
                                         ? this.state.chosenDateEvents.map((event, index) => {
                                             return (
                                                 <Event key={event.id} eventInfo={event} />

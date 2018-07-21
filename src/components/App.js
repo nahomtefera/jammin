@@ -80,7 +80,7 @@ class App extends Component {
     // If the user is authenticated we can get all the events
     let events = []
 
-    if(this.state.authUser != "null"){
+    if(this.state.authUser !== "null"){
       db.getChildEvents().on("child_added", snap=>{
         events.unshift(snap.val())
       })
@@ -175,7 +175,7 @@ class App extends Component {
             {/* Loader for intro */}
           <div className={this.state.loading === 'true' ? "loader-container" : "hide"}>
             <div className="loader-wrapper">
-              <h1 className="loader-text"></h1>
+              <h1 className="loader-text"> </h1>
               <div className="loader">Loading...</div>
             </div>
             
@@ -238,7 +238,7 @@ class App extends Component {
                       : "toggle-create-event-window"}>Event +</button>
                   </div>
                   {/* Modal to Create Events */}
-                  {this.state.creatingEvent != false 
+                  {this.state.creatingEvent !== false 
                     ? <CreateEvent {...props} toggleWindow={this.toggleCreateEventWindow} createEvent={this.createEvent} /> 
                     : ""
                   }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './event.css';
 import firebase from 'firebase/app';
 import '../firebase/';
-import { db } from '../firebase/';
 import {Link} from 'react-router-dom';
 
     
@@ -40,7 +39,12 @@ class Event extends Component {
         let event_owner;
         firebase.database().ref(`users/${this.props.eventInfo.uid}`).once('value').then(snap=>{
             event_owner = snap.val()
+        }).then(()=>{
+            this.setState({
+                event_owner: event_owner
+            })
         })
+        
     }
 
     joinEvent(){
@@ -68,7 +72,7 @@ class Event extends Component {
         // If memberIndex === -1 it means the uid was not found in event members
         // If it's different than -1 we will get the index and remove the item from eventMembers 
         // Then we will update firebase
-        if(memberIndex != -1) {
+        if(memberIndex !== -1) {
             eventMembers.splice(memberIndex, 1);
 
             firebase.database().ref().child('/events/' + this.props.eventInfo.id)
@@ -108,7 +112,7 @@ class Event extends Component {
                 {/* <p className="event-card-description-container">{this.props.eventInfo.description}</p> */}
                 <div className="event-card-handlers">
 
-                    {this.state.eventJoined == "false" 
+                    {this.state.eventJoined === "false" 
                         ? <div className="event-card-handler-icon join-event" onClick={this.joinEvent}>Join Event</div>
                         : <div className="event-card-handler-icon leave-event" onClick={this.leaveEvent}>Leave Event</div>
                     }
