@@ -16,7 +16,6 @@ class Event extends Component {
 
         let currentUserId = firebase.auth().currentUser.uid;
         let eventMembers = this.props.eventInfo.members
-        // console.log("currentUser: ", currentUserId, "eventMembers: ", eventMembers);
 
         if(eventMembers.includes(currentUserId)) {
             this.state = {
@@ -41,40 +40,44 @@ class Event extends Component {
         let event_owner;
         firebase.database().ref(`users/${this.props.eventInfo.uid}`).once('value').then(snap=>{
             event_owner = snap.val()
-        }).then(()=>{
-            console.log("all Good bruh")
-        });
-
+        })
     }
 
     joinEvent(){
         let eventMembers = this.props.eventInfo.members;
-
+        // We will use the includes() method to check if the current user id 
+        // Is inside the members array of the event
         if(!eventMembers.includes(this.state.currentUserId)) {
+            // If the uid is not inside eventMembers we will push it and update firebase
             eventMembers.push(this.state.currentUserId)
-            
+
             firebase.database().ref().child('/events/' + this.props.eventInfo.id)
             .update({ members: eventMembers}).then(()=>{
                 this.setState({eventJoined: "true"});
             })
         } else {
-            console.log("user has already joined this event")
+            // User has already joined this event
             return
         }
     }
 
     leaveEvent(){
         let eventMembers = this.props.eventInfo.members;
+        let memberIndex = eventMembers.indexOf(this.state.currentUserId) 
 
-        eventMembers.map((member, index) => {
-            if(member === this.state.currentUserId) {
-                eventMembers.splice(index, 1);
-                firebase.database().ref().child('/events/' + this.props.eventInfo.id)
+        // If memberIndex === -1 it means the uid was not found in event members
+        // If it's different than -1 we will get the index and remove the item from eventMembers 
+        // Then we will update firebase
+        if(memberIndex != -1) {
+            eventMembers.splice(memberIndex, 1);
+
+            firebase.database().ref().child('/events/' + this.props.eventInfo.id)
                 .update({ members: eventMembers})
                 this.setState({eventJoined: "false"})
-                return
-            } 
-        })
+        } else {
+            console.log("user is not member of this event")
+            return
+        }
     }
 
     render() {

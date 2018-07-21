@@ -24,7 +24,6 @@ class EventResults extends Component {
     }
 
     componentWillMount(){
-        console.log("mounting EventResults")
         let today = moment().format("dddd, MMMM DD YYYY")
         let eventsToday = [];
         let allEvents = [];
