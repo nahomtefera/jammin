@@ -14,11 +14,24 @@ class Event extends Component {
     constructor(props){
         super(props);
 
-        this.state = {
-            event_owner: {},
-            eventJoined: "false",
-            currentUserId: firebase.auth().currentUser.uid
+        let currentUserId = firebase.auth().currentUser.uid;
+        let eventMembers = this.props.eventInfo.members
+        // console.log("currentUser: ", currentUserId, "eventMembers: ", eventMembers);
+
+        if(eventMembers.includes(currentUserId)) {
+            this.state = {
+                event_owner: {},
+                eventJoined: "true",
+                currentUserId: currentUserId
+            }
+        } else {
+            this.state = {
+                event_owner: {},
+                eventJoined: "false",
+                currentUserId: currentUserId
+            }
         }
+        
 
         this.joinEvent = this.joinEvent.bind(this);
         this.leaveEvent = this.leaveEvent.bind(this);
@@ -26,24 +39,10 @@ class Event extends Component {
 
     componentWillMount(){
         let event_owner;
-        
         firebase.database().ref(`users/${this.props.eventInfo.uid}`).once('value').then(snap=>{
             event_owner = snap.val()
         }).then(()=>{
-            // We are gonna check if the current user has joined this event
-            // If they have we will update eventJoind state 
-            this.props.eventInfo.members != undefined 
-                ? this.props.eventInfo.members.map(member => {
-                    if(member === this.state.currentUserId) {
-                        this.setState ({
-                            event_owner: event_owner,
-                            eventJoined: "true"
-                        })
-                    }
-                })
-                : this.setState ({
-                    event_owner: event_owner,
-                })
+            console.log("all Good bruh")
         });
 
     }
@@ -51,34 +50,30 @@ class Event extends Component {
     joinEvent(){
         let eventMembers = this.props.eventInfo.members;
 
-        eventMembers.map(member => {
-            if(member === this.state.currentUserId) {
-                return
-            } else {
-                eventMembers.push(this.state.currentUserId)
-            }
-        })
-        
-        
-        firebase.database().ref().child('/events/' + this.props.eventInfo.id)
-        .update({ members: eventMembers})
-        // .then(()=>{
-        //   // Reload page to be able to see the picture uploaded
-        //   window.location.reload()
-        // })
-        this.setState({eventJoined: "true"});
+        if(!eventMembers.includes(this.state.currentUserId)) {
+            eventMembers.push(this.state.currentUserId)
+            
+            firebase.database().ref().child('/events/' + this.props.eventInfo.id)
+            .update({ members: eventMembers}).then(()=>{
+                this.setState({eventJoined: "true"});
+            })
+        } else {
+            console.log("user has already joined this event")
+            return
+        }
     }
 
     leaveEvent(){
         let eventMembers = this.props.eventInfo.members;
 
-        eventMembers.map(member => {
+        eventMembers.map((member, index) => {
             if(member === this.state.currentUserId) {
-                return
-            } else {
-                console.log("user is in the event")
+                eventMembers.splice(index, 1);
+                firebase.database().ref().child('/events/' + this.props.eventInfo.id)
+                .update({ members: eventMembers})
                 this.setState({eventJoined: "false"})
-            }
+                return
+            } 
         })
     }
 

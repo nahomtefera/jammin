@@ -24,6 +24,7 @@ class EventResults extends Component {
     }
 
     componentWillMount(){
+        console.log("mounting EventResults")
         let today = moment().format("dddd, MMMM DD YYYY")
         let eventsToday = [];
         let allEvents = [];
@@ -57,7 +58,7 @@ class EventResults extends Component {
         this.state.allEvents.map((event)=> {
             let date = event.date;
 
-            if(date == chosenDate) {
+            if(date === chosenDate) {
                 chosenDateEvents.push(event)
             }
         })
@@ -66,7 +67,7 @@ class EventResults extends Component {
             startDate: date,
             showEvents: "chosen-date",
             chosenDateEvents: chosenDateEvents
-        });
+        }, ()=>{console.log("date has changed")});
     }
 
     render() {
@@ -85,35 +86,42 @@ class EventResults extends Component {
                                     : null
 
                     }
-                    {
+                    {/* Rendering Events depending on the filter */}
+                    {   
+                        // ALL Events
                         this.state.showEvents === "show-all-events" 
                             ? this.state.allEvents.length != 0 
                                 ? this.state.allEvents.map((event, index) => {
                                     return (
-                                        <Event key={index} eventInfo={event} />
+                                        <Event key={event.id} eventInfo={event} />
                                     )
                                 })
+                                // If there are no events in this category we will let the user now
                                 :   <div className="no-events">No events, why don't you create one?</div>
 
-                        : this.state.showEvents === "show-events-today"
-                            ? this.state.eventsToday.length != 0 
-                                ? this.state.eventsToday.map((event, index) => {
-                                    return (
-                                        <Event key={index} eventInfo={event} />
-                                    )
-                                })
-                                :   <div className="no-events"> No events today, why don't you create one?</div>
-
-                            : this.state.showEvents === "chosen-date"
-                                ? this.state.chosenDateEvents.length != 0
-                                    ? this.state.chosenDateEvents.map((event, index) => {
+                            // Events happening TODAY
+                            : this.state.showEvents === "show-events-today"
+                                ? this.state.eventsToday.length != 0 
+                                    ? this.state.eventsToday.map((event, index) => {
                                         return (
-                                            <Event key={index} eventInfo={event} />
+                                            <Event key={event.id} eventInfo={event} />
                                         )
                                     })
-                                    :<div className="no-events"> There are no events this date, why don't you create one?</div>
+                                    // If there are no events in this category we will let the user now
+                                    :   <div className="no-events"> No events today, why don't you create one?</div>
 
-                                :<div className="no-events"> You didn't join any event, join one and it will show here.</div>
+                                // Events happening on SPECIFIC DATE
+                                : this.state.showEvents === "chosen-date"
+                                    ? this.state.chosenDateEvents.length != 0
+                                        ? this.state.chosenDateEvents.map((event, index) => {
+                                            return (
+                                                <Event key={event.id} eventInfo={event} />
+                                            )
+                                        })
+                                        // If there are no events in this category we will let the user now
+                                        :<div className="no-events"> There are no events this date, why don't you create one?</div>
+
+                                    :<div className="no-events"> You didn't join any event, join one and it will show here.</div>
                     }
                 </div>
 
