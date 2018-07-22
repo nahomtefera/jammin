@@ -92,6 +92,17 @@ input[type="file"] {
     margin-bottom: 15px;
 }
 
+.create-event-modal-info-error {
+    color: #e83a5b;
+    padding-left: 110px;
+    margin-bottom: 8px;
+}
+
+.create-event-modal-info-error:last-child {
+    padding-left: none;
+    text-align: right;
+}
+
 .create-event-modal-info-field div:last-child {
     display: inline-block;
 }
@@ -119,6 +130,17 @@ input[type="file"] {
     font-size: 0.9em;
 }
 
+.create-event-modal-info-input-error {
+    padding: 8px;
+    width: 240px;
+    border-radius: 3px;
+    border: 1px solid #ffdede;
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(255, 0, 0, 0.23);
+    box-shadow: 0px 0px 1px 0px rgba(255, 0, 0, 0.23);    
+    outline: none;
+    font-size: 0.9em;
+}
+
 .create-event-modal-info-textarea {
     padding: 8px;
     width: 100%;
@@ -128,6 +150,21 @@ input[type="file"] {
     margin-top: 8px;
     border-radius: 3px;
     border: 1px solid #efefef;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.create-event-modal-info-textarea-error {
+    padding: 8px;
+    width: 100%;
+    min-height: 100px;
+    display: inline-block;
+    margin: 0 auto;
+    margin-top: 8px;
+    border-radius: 3px;
+    border: 1px solid #ffdede;
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(255, 0, 0, 0.23);
+    box-shadow: 0px 0px 1px 0px rgba(255, 0, 0, 0.23);   
     outline: none;
     font-size: 0.9em;
 }
