@@ -58,7 +58,7 @@ class Event extends Component {
             firebase.database().ref().child('/events/' + this.props.eventInfo.id)
             .update({ members: eventMembers}).then(()=>{
                 this.setState({eventJoined: "true"});
-            })
+            });
         } else {
             // User has already joined this event
             return

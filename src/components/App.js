@@ -27,10 +27,12 @@ class App extends Component {
       loading: "true",
       // SignedUser
       authUser: null,
+      userInfo: null,
       // Is User Creating Event
       creatingEvent: false,
       // Events
       events: [],
+
     }
     // Config for firebaseAuthUi - Authentification
     this.uiConfig = {
@@ -49,9 +51,6 @@ class App extends Component {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
           } 
 
-          this.setState({
-            authUser: true
-          })
         },
         signInFailure: function(error) {
           // Some unrecoverable error occurred during sign-in.
@@ -79,15 +78,15 @@ class App extends Component {
 
     // If the user is authenticated we can get all the events
     let events = []
+    let userInfo = null;
 
     if(this.state.authUser !== "null"){
       db.getChildEvents().on("child_added", snap=>{
         events.unshift(snap.val())
-      })
+      });
     }
 
     this.setState({events})
-
   }
 
   componentDidMount() {
@@ -97,9 +96,17 @@ class App extends Component {
     // And set it to user if user signs-in
     firebase.auth().onAuthStateChanged(authUser => {
       authUser
-        ? this.setState(() => ({ authUser }))
+        ? (
+            firebase.database().ref(`users/${authUser.uid}`).once('value').then(snap=>{
+              let userInfo = snap.val();
+              this.setState(() => ({ authUser: authUser, userInfo: userInfo }))
+            })
+          
+          )
         : this.setState(() => ({ authUser: null }));
     });
+
+
   }
 
   toggleCreateEventWindow(){
