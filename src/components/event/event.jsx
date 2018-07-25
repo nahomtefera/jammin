@@ -44,11 +44,13 @@ class Event extends Component {
                 event_owner: event_owner
             })
         })
-        
     }
 
     joinEvent(){
         let eventMembers = this.props.eventInfo.members;
+        let currentEventId = this.props.eventInfo.id;
+        let eventsUserGoing = this.props.currentUserInfo.eventsGoing;
+        console.log(eventsUserGoing)
         // We will use the includes() method to check if the current user id 
         // Is inside the members array of the event
         if(!eventMembers.includes(this.state.currentUserId)) {
@@ -57,6 +59,11 @@ class Event extends Component {
 
             firebase.database().ref().child('/events/' + this.props.eventInfo.id)
             .update({ members: eventMembers}).then(()=>{
+                eventsUserGoing.push(currentEventId);
+
+                firebase.database().ref().child('/users/' + this.state.currentUserId)
+                .update({ eventsGoing: eventsUserGoing})
+                
                 this.setState({eventJoined: "true"});
             });
         } else {

@@ -91,7 +91,7 @@ class EventResults extends Component {
                             ? this.state.allEvents.length !== 0 
                                 ? this.state.allEvents.map((event, index) => {
                                     return (
-                                        <Event key={event.id} eventInfo={event} />
+                                        <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                     )
                                 })
                                 // If there are no events in this category we will let the user now
@@ -102,7 +102,7 @@ class EventResults extends Component {
                                 ? this.state.eventsToday.length !== 0 
                                     ? this.state.eventsToday.map((event, index) => {
                                         return (
-                                            <Event key={event.id} eventInfo={event} />
+                                            <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                         )
                                     })
                                     // If there are no events in this category we will let the user now
@@ -113,7 +113,7 @@ class EventResults extends Component {
                                     ? this.state.chosenDateEvents.length !== 0
                                         ? this.state.chosenDateEvents.map((event, index) => {
                                             return (
-                                                <Event key={event.id} eventInfo={event} />
+                                                <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                             )
                                         })
                                         // If there are no events in this category we will let the user now
