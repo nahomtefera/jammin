@@ -33,8 +33,16 @@ class EventResults extends Component {
         
         this.props.events.map((event)=>{
             let date = event.date;
+            // Transform dates to unix to be able to compare dates
+            let dateUnix = moment(date).unix()
+            let nowUnix = moment().unix()
 
-            allEvents.push(event);
+
+            // We will check if the event date is in the future or if 
+            // it has already passed, if it's in the future we will display it
+            if(dateUnix >= nowUnix){
+                allEvents.push(event);
+            }
 
             if(date === today) {
                 eventsToday.push(event)
