@@ -49,7 +49,10 @@ class Event extends Component {
     joinEvent(){
         let eventMembers = this.props.eventInfo.members;
         let currentEventId = this.props.eventInfo.id;
-        let eventsUserGoing = this.props.currentUserInfo.eventsGoing;
+        let eventsUserGoing;
+        this.props.currentUserInfo.eventsGoing 
+            ? eventsUserGoing = this.props.currentUserInfo.eventsGoing
+            : eventsUserGoing = []
 
         // We will use the includes() method to check if the current user id 
         // Is inside the members array of the event

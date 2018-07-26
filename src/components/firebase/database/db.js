@@ -10,6 +10,7 @@ import { db } from '../firebase';
       name,
       email,
       photoURL,
+      eventsGoing: [""],
       username: "",
       bio: "",
       gender: "",
