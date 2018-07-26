@@ -105,14 +105,6 @@ class App extends Component {
           )
         : this.setState(() => ({ authUser: null }));
     });
-
-    if(this.state.userInfo !== null) {
-      firebase.database().ref().child('/users/' + this.state.userInfo.id)
-                .on("child_added", (snap)=>{
-                  console.log(snap)
-                })
-    }
-
   }
 
   toggleCreateEventWindow(){

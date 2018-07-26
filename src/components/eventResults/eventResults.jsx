@@ -15,18 +15,21 @@ class EventResults extends Component {
             allEvents: [],
             eventsToday: [],
             chosenDateEvents: [],
+            myEvents: [],
             showEvents: "show-all-events",
             startDate: moment()
         }
 
         this.changeFilter = this.changeFilter.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.updateEvents = this.updateEvents.bind(this)
     }
 
     componentWillMount(){
         let today = moment().format("dddd, MMMM DD YYYY")
         let eventsToday = [];
         let allEvents = [];
+        let myEvents = []
         
         this.props.events.map((event)=>{
             let date = event.date;
@@ -36,9 +39,37 @@ class EventResults extends Component {
             if(date === today) {
                 eventsToday.push(event)
             }
+            // If the user is going to events we will add the to myEvents
+            this.props.currentUserInfo.eventsGoing!== undefined && this.props.currentUserInfo.eventsGoing.length !== 0 
+                ? this.props.currentUserInfo.eventsGoing.map((eventGoingId)=>{
+                    // console.log(eventGoingId)
+                    // console.log("event id: ",event.id)
+                    if(eventGoingId === event.id) {
+                        myEvents.push(event)
+                    }
+                })
+                : null
         });
 
-        this.setState({allEvents: allEvents, eventsToday: eventsToday})
+        this.setState({allEvents: allEvents, eventsToday: eventsToday, myEvents: myEvents})
+    }
+
+    // This function will update the eventsGoing state everytime we join or leave an event
+    updateEvents() {
+        let myEvents = []
+        this.props.events.map((event)=>{
+
+            this.props.currentUserInfo.eventsGoing.map((eventGoingId)=>{
+                // console.log(eventGoingId)
+                // console.log("event id: ",event.id)
+                if(eventGoingId === event.id) {
+                    myEvents.push(event)
+                }
+            })
+        });
+
+        this.setState({myEvents: myEvents})
+
     }
 
     changeFilter(el){
@@ -91,7 +122,7 @@ class EventResults extends Component {
                             ? this.state.allEvents.length !== 0 
                                 ? this.state.allEvents.map((event, index) => {
                                     return (
-                                        <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
+                                        <Event updateEvents={this.updateEvents} currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                     )
                                 })
                                 // If there are no events in this category we will let the user now
@@ -102,7 +133,7 @@ class EventResults extends Component {
                                 ? this.state.eventsToday.length !== 0 
                                     ? this.state.eventsToday.map((event, index) => {
                                         return (
-                                            <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
+                                            <Event updateEvents={this.updateEvents} currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                         )
                                     })
                                     // If there are no events in this category we will let the user now
@@ -113,13 +144,21 @@ class EventResults extends Component {
                                     ? this.state.chosenDateEvents.length !== 0
                                         ? this.state.chosenDateEvents.map((event, index) => {
                                             return (
-                                                <Event currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
+                                                <Event updateEvents={this.updateEvents} currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
                                             )
                                         })
                                         // If there are no events in this category we will let the user now
                                         :<div className="no-events"> There are no events this date, why don't you create one?</div>
-
-                                    :<div className="no-events"> You didn't join any event, join one and it will show here.</div>
+                                    
+                                    : this.state.showEvents === "show-my-events"
+                                        ? this.state.myEvents.length !== 0 
+                                            ? this.state.myEvents.map((event, index) => {
+                                                return (
+                                                    <Event updateEvents={this.updateEvents} currentUserInfo={this.props.currentUserInfo} key={event.id} eventInfo={event} />
+                                                )
+                                            })
+                                        :<div className="no-events"> You didn't join any event, join one and it will show here.</div>
+                                    : null
                     }
                 </div>
 
