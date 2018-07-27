@@ -51,7 +51,7 @@ class EventResults extends Component {
                 ? this.props.currentUserInfo.eventsGoing.map((eventGoingId)=>{
                     // console.log(eventGoingId)
                     // console.log("event id: ",event.id)
-                    if(eventGoingId === event.id) {
+                    if(eventGoingId === event.id && dateUnix >= todayUnix) {
                         myEvents.push(event)
                     }
                 })
