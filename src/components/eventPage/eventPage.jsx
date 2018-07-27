@@ -63,25 +63,28 @@ class EventPage extends Component {
         // Once we have the event info we will use the uid of the even
         // And we will access firebase again to get the event_owner info
         .then(()=>{
-            firebase.database().ref(`eventsComments/${event_id}/`).on("child_added", snap=>{
-                // Everytime a message is created it will update commentsArr
-                commentsArr.push(snap.val());
-
-                firebase.database().ref(`users/${event_info.uid}`).once('value').then(snap=>{
-                    user_info = snap.val()
-                })
-                // Once we have all the info regarding the event 
-                // We will update the state with the info
-                .then(()=>{
+            firebase.database().ref(`users/${event_info.uid}`).once('value').then(snap=>{
+                user_info = snap.val()
+                console.log(event_info)
+            })
+            // Once we have all the info regarding the event 
+            // We will update the state with the info
+            .then(()=>{
+                firebase.database().ref(`eventsComments/${event_id}/`).on("child_added", snap=>{
+                    // Everytime a message is created it will update commentsArr
+                    commentsArr.push(snap.val());
                     self.setState({
-                        event: event_info,
-                        event_owner: user_info,
-                        comments: commentsArr
+                        comments: commentsArr,
+                        newComment: ""
                     })
+                });
+
+                self.setState({
+                    event: event_info,
+                    event_owner: user_info,
+                    comments: commentsArr
                 })
             })
-
-            
         })
     }
 
@@ -138,18 +141,20 @@ class EventPage extends Component {
                         <ul className="comments-list-container">
                             {
                                 this.state.comments !== null
-                                    ? this.state.comments.map((comment)=>{
-                                        return <li key={comment.timestamp} className="comments-list-item">
-                                            <div className="comments-list-outer-container">
-                                                <span className="comment-user">{comment.user}</span>
-                                                <span className="comment-message">{comment.message}</span>
-                                                <span className="comment-time">{
-                                                    moment(comment.timestamp).format("MMM DD - HH:mm")
-                                                }</span>
-                                            </div>
-                                        </li>
-                                    })
-                                    : <li className="comments-list-item">No comments yet.</li>
+                                    ? this.state.comments.length > 0
+                                        ? this.state.comments.map((comment)=>{
+                                            return <li key={comment.timestamp} className="comments-list-item">
+                                                <div className="comments-list-outer-container">
+                                                    <span className="comment-user">{comment.user}</span>
+                                                    <span className="comment-message">{comment.message}</span>
+                                                    <span className="comment-time">{
+                                                        moment(comment.timestamp).format("MMM DD - HH:mm")
+                                                    }</span>
+                                                </div>
+                                            </li>
+                                        })
+                                        : <li className="comments-list-item-empty">No comments yet.</li>
+                                    : <li className="comments-list-item-empty">No comments yet.</li>
                             }
                         </ul>
                     </div>
@@ -165,9 +170,9 @@ class EventPage extends Component {
                             placeholder="Comment..." 
                             value={this.state.newComment} 
                             onChange={this.handleChange}
-                            name="comment" cols="30" rows="4"></textarea>
+                            name="comment" cols="30" rows="2"></textarea>
                         
-                        <button onClick={this.submitMessage}>Post message</button>
+                        <button className="comment-send-button" onClick={this.submitMessage}>Send</button>
                     </div>
                 </div>
             </div>
