@@ -118,18 +118,22 @@ class EventPage extends Component {
                     </div>
 
                     <div className="event-info">
-                        
-                        <div className="event-date">{this.state.event.date}</div>
-                        <div className="event-time">{this.state.event.time}</div>
 
                         <div className="event-description">
                             <span className="event-description-title">Description</span>
                             <p className="event-description-text">{this.state.event.description}</p>
                         </div>
+
+                        <div className="event-date-time-location">
+                            <span className="event-date-title">Date and Time</span>
+                            <div className="event-date">{this.state.event.date}</div>
+                            <div className="event-time">{this.state.event.time}</div>
+                        </div>
                     </div>
 
                     <div className="event-user-info">
-                        <div className="user-name">{this.state.event_owner.name}</div>
+                        <img className="event-owner-img" src={this.state.event_owner.photoURL != null ? this.state.event_owner.photoURL : "https://goo.gl/cJ1cte"} alt="profile pic"/>
+                        <div className="event-owner-user-name">{this.state.event_owner.name}</div>
                     </div>
                 </div>
 
