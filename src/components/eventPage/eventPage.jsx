@@ -11,8 +11,17 @@ class EventPage extends Component {
         this.state = {
             loading: "true",
             event: {},
-            event_owner: {}
+            event_owner: {},
+            newComment: ""
         }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(el) {
+        let value = el.target.value;
+
+        this.setState({newComment: value})
     }
 
     componentWillMount(){
@@ -92,6 +101,26 @@ class EventPage extends Component {
                     </div>
                 </div>
 
+                {/* COMMENTS SECTION */}
+                <div className="comments-container">
+                    <h1 className="comments-title">Comments</h1>
+                    
+                    <div className="comment-input-container">
+                        
+                        {
+                            this.props.currentUser.photoURL !== null 
+                                ? <img className="current-user-img" src={this.props.currentUser.photoURL} alt="profile pic"/>
+                                : <img className="current-user-img" src="https://goo.gl/cJ1cte" alt="no profile pic"/>
+                        }
+                    
+                        <textarea className="comment-input" 
+                            placeholder="Comment..." 
+                            value={this.state.newComment} 
+                            onChange={this.handleChange}
+                            name="comment" cols="30" rows="4"></textarea>
+                    
+                    </div>
+                </div>
             </div>
         )
     }

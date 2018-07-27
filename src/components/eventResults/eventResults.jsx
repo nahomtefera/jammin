@@ -35,12 +35,12 @@ class EventResults extends Component {
             let date = event.date;
             // Transform dates to unix to be able to compare dates
             let dateUnix = moment(date).unix()
-            let nowUnix = moment().unix()
-
+            let todayUnix = moment(today).unix()
+            console.log("today: ",moment(today).unix(), "now: ", todayUnix)
 
             // We will check if the event date is in the future or if 
             // it has already passed, if it's in the future we will display it
-            if(dateUnix >= nowUnix){
+            if(dateUnix >= todayUnix){
                 allEvents.push(event);
             }
 

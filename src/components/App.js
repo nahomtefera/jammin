@@ -266,7 +266,7 @@ class App extends Component {
               return(
                 <div>
                   <Navbar isEventPage={true} authUser={this.state.authUser}/>
-                  <EventPage props={props}/>
+                  <EventPage currentUser={this.state.userInfo} props={props}/>
                 </div>  
               )
             } 
