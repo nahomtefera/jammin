@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './eventPage.css';
+import moment from 'moment';
 import firebase from 'firebase/app';
 import '../firebase/';
 
@@ -12,17 +13,35 @@ class EventPage extends Component {
             loading: "true",
             event: {},
             event_owner: {},
+            comments: null,
             newComment: ""
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.submitMessage = this.submitMessage.bind(this)
     }
 
+    submitMessage(){
+        let timestamp = Date.now();
+        let commentInfo = {message: this.state.newComment, user: this.props.currentUser.name, timestamp: timestamp}
+        
+
+        firebase.database().ref().child('/eventsComments/' + this.state.event.id + '/' + timestamp)
+                .update({
+                    message: this.state.newComment, 
+                    user: this.props.currentUser.name,
+                    user_img: this.props.currentUser.photoURL, 
+                    timestamp: timestamp
+                })
+    }
+    // 
     handleChange(el) {
         let value = el.target.value;
 
         this.setState({newComment: value})
     }
+
+    //
 
     componentWillMount(){
         //loader will appear everytime we open a new event page
@@ -34,6 +53,8 @@ class EventPage extends Component {
         let event_id = this.props.props.match.params.id; {/* Event ID*/}
         let event_info = {}
         let user_info = {}
+        let event_comments = []
+        let commentsArr = []
         // We will call firebase to get all the info for the current event
         // Then we will pass the values of the event to the state
         firebase.database().ref(`events/${event_id}`).once('value').then(snap=>{
@@ -42,21 +63,29 @@ class EventPage extends Component {
         // Once we have the event info we will use the uid of the even
         // And we will access firebase again to get the event_owner info
         .then(()=>{
-            firebase.database().ref(`users/${event_info.uid}`).once('value').then(snap=>{
-                user_info = snap.val()
-            })
-            // Once we have all the info regarding the event 
-            // We will update the state with the info
-            .then(()=>{
-                this.setState({
-                    event: event_info,
-                    event_owner: user_info
+            firebase.database().ref(`eventsComments/${event_id}/`).on("child_added", snap=>{
+                // Everytime a message is created it will update commentsArr
+                commentsArr.push(snap.val());
+
+                firebase.database().ref(`users/${event_info.uid}`).once('value').then(snap=>{
+                    user_info = snap.val()
+                })
+                // Once we have all the info regarding the event 
+                // We will update the state with the info
+                .then(()=>{
+                    self.setState({
+                        event: event_info,
+                        event_owner: user_info,
+                        comments: commentsArr
+                    })
                 })
             })
-        })
-        
 
+            
+        })
     }
+
+    
     render(){
         // event: date, description, id, imageURL, location, time, title, uid
         // user: name, username, photoURL
@@ -104,9 +133,28 @@ class EventPage extends Component {
                 {/* COMMENTS SECTION */}
                 <div className="comments-container">
                     <h1 className="comments-title">Comments</h1>
-                    
+
+                    <div className="comments-messages">
+                        <ul className="comments-list-container">
+                            {
+                                this.state.comments !== null
+                                    ? this.state.comments.map((comment)=>{
+                                        return <li key={comment.timestamp} className="comments-list-item">
+                                            <div className="comments-list-outer-container">
+                                                <span className="comment-user">{comment.user}</span>
+                                                <span className="comment-message">{comment.message}</span>
+                                                <span className="comment-time">{
+                                                    moment(comment.timestamp).format("MMM DD - HH:mm")
+                                                }</span>
+                                            </div>
+                                        </li>
+                                    })
+                                    : <li className="comments-list-item">No comments yet.</li>
+                            }
+                        </ul>
+                    </div>
+
                     <div className="comment-input-container">
-                        
                         {
                             this.props.currentUser.photoURL !== null 
                                 ? <img className="current-user-img" src={this.props.currentUser.photoURL} alt="profile pic"/>
@@ -118,7 +166,8 @@ class EventPage extends Component {
                             value={this.state.newComment} 
                             onChange={this.handleChange}
                             name="comment" cols="30" rows="4"></textarea>
-                    
+                        
+                        <button onClick={this.submitMessage}>Post message</button>
                     </div>
                 </div>
             </div>
