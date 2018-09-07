@@ -14,6 +14,7 @@ class EventPage extends Component {
             event: {},
             event_owner: {},
             comments: null,
+            comment_error: false,
             newComment: ""
         }
 
@@ -25,6 +26,10 @@ class EventPage extends Component {
         let timestamp = Date.now();
         let commentInfo = {message: this.state.newComment, user: this.props.currentUser.name, timestamp: timestamp}
         
+        if(this.state.newComment == "" || this.state.newComment.length < 5) {
+            this.setState({comment_error: true})
+            return
+        }
 
         firebase.database().ref().child('/eventsComments/' + this.state.event.id + '/' + timestamp)
                 .update({
@@ -32,7 +37,7 @@ class EventPage extends Component {
                     user: this.props.currentUser.name,
                     user_img: this.props.currentUser.photoURL, 
                     timestamp: timestamp
-                })
+                }).then(()=>{this.setState({newComment:"", comment_error:false})})
     }
     // 
     handleChange(el) {
@@ -164,6 +169,14 @@ class EventPage extends Component {
                     </div>
 
                     <div className="comment-input-container">
+                        <div className="comment-error-message">
+                            {
+                                this.state.comment_error === true 
+                                    ? "* Comment is empty or to short"
+                                    : null
+                            }
+                        </div>
+
                         {
                             this.props.currentUser.photoURL !== null 
                                 ? <img className="current-user-img" src={this.props.currentUser.photoURL} alt="profile pic"/>

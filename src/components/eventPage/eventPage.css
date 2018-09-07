@@ -215,6 +215,13 @@
     resize: none;
 }
 
+.comment-error-message {
+    min-height: 20px;
+    color: #f25b5d;
+    padding-left: 30px;
+    padding-top: 17px;
+}
+
 .comment-send-button {
     border: 1px solid #f25b5d;
     color: #f25b5d;
