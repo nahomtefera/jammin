@@ -30,11 +30,13 @@ class CreateEvent extends Component {
                 title_err: "",
                 location: false,
                 location_err: "",
+                address: false,
+                address_error: "",
                 date: false,
                 time: false,
                 time_err: "",
                 description: false,
-                description_err: ""
+                description_err: "",
             }
         }
 
@@ -76,6 +78,19 @@ class CreateEvent extends Component {
         } else {
             prevErr.location = "false";
             prevErr.location_err = null
+        }
+        // Location
+        if(state.address === "") {
+            prevErr.address = "true";
+            prevErr.address_error = "Enter a valid Address"    
+            errors++    
+        } else if(state.location.length < 8){
+            prevErr.address = "true";
+            prevErr.address_error = "Address should be longer"  
+            errors++          
+        } else {
+            prevErr.address = "false";
+            prevErr.address_error = null
         }
         // Time
         if(state.time === "" ) {
@@ -200,7 +215,8 @@ class CreateEvent extends Component {
                                     className={this.state.inputErrors.title === "true"
                                         ? "create-event-modal-info-input-error"
                                         : "create-event-modal-info-input"
-                                    } 
+                                    }
+                                    placeholder="Jam Session, Open Mic..." 
                                     name="title" 
                                     value={this.state.title} 
                                     onChange={this.handleInputChange} type="text"/>
@@ -219,8 +235,28 @@ class CreateEvent extends Component {
                                         ? "create-event-modal-info-input-error"
                                         : "create-event-modal-info-input"
                                     } 
+                                    placeholder="Dolores Park, Golden Gate Park..."
                                     name="location" 
                                     value={this.state.location} 
+                                    onChange={this.handleInputChange} type="text"/>
+                            </div>
+                            {/* ADDRESS */}
+                            <div className="create-event-modal-info-field">
+                                <div className="create-event-modal-info-error">
+                                    {this.state.inputErrors.address === "true" 
+                                        ? "*" + this.state.inputErrors.address_error
+                                        : ""
+                                    }
+                                </div>
+                                <div className="create-event-modal-info-label" htmlFor="address">Address</div>
+                                <input 
+                                    className={this.state.inputErrors.address === "true"
+                                        ? "create-event-modal-info-input-error"
+                                        : "create-event-modal-info-input"
+                                    } 
+                                    placeholder="23 Post Street, San Francisco"
+                                    name="address" 
+                                    value={this.state.address} 
                                     onChange={this.handleInputChange} type="text"/>
                             </div>
                             {/* DATE */}
@@ -275,6 +311,7 @@ class CreateEvent extends Component {
                                         ? "create-event-modal-info-textarea-error"
                                         : "create-event-modal-info-textarea"
                                     } 
+                                    placeholder="Let's meet at Dolores Park, feel free to bring food and/or drinks. You will have to bring your instruments."
                                     name="description" 
                                     value={this.state.description} 
                                     onChange={this.handleInputChange} type="text"> 

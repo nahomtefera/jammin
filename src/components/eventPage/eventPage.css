@@ -29,6 +29,7 @@
     box-sizing: border-box;
     font-family: Lato;
     background: #fff;
+    padding-bottom: 8.5em;
 }
 
 .event-info {
@@ -217,11 +218,18 @@
 .comment-send-button {
     border: 1px solid #f25b5d;
     color: #f25b5d;
+    border-radius: 5px;
     padding: 5px;
     font-size: 15px;
     margin: 15px;
     cursor: pointer;
+    outline: none;
     float: right;
+}
+
+.comment-send-button:hover {
+    color: white;
+    background: #f25b5d;
 }
 
 /* LOADER */
