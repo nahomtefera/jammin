@@ -19,6 +19,7 @@ class CreateEvent extends Component {
             imageURL: false,
             title: "",
             location: "",
+            address: "",
             date: moment().format("dddd, MMMM DD YYYY"),
             time: "",
             description: "",

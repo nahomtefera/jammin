@@ -43,7 +43,7 @@ class EventPage extends Component {
     handleChange(el) {
         let value = el.target.value;
 
-        this.setState({newComment: value})
+        this.setState({newComment: value, comment_error:false})
     }
 
     //
@@ -133,6 +133,10 @@ class EventPage extends Component {
                             <span className="event-date-title">Date and Time</span>
                             <div className="event-date">{this.state.event.date}</div>
                             <div className="event-time">{this.state.event.time}</div>
+                            <br/><br/>
+                            <span className="event-date-title">Location</span>
+                            <div className="event-date">{this.state.event.location}</div>
+                            <div className="event-date">{this.state.event.address ? this.state.event.address : ""}</div>
                         </div>
                     </div>
 

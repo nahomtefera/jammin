@@ -43,7 +43,7 @@ class LandingPage extends Component {
                     </div>
                 </div>
                 {/* Featured Events */}
-                <FeaturedEvents />
+                {/* <FeaturedEvents /> */}
             </div>
         )
     }

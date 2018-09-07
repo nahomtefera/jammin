@@ -1,16 +1,17 @@
 .event-page-background {
     width: 100%;
     box-sizing: border-box;
-    height: 650px;
+    height: 500px;
     position: absolute;
     top: 0;
     left: 0;
     background: #fafafa;
     z-index: -1;
     border-bottom: 1px solid #ececec;
-    background: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url(https://goo.gl/nRpQTv);
+    /* https://goo.gl/xe3trV,  https://goo.gl/yRVGha, https://goo.gl/nRpQTv, https://goo.gl/oK1cbV, https://goo.gl/sofGZn, */
+    background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25) ), url(https://goo.gl/sofGZn);
     background-size: cover;
-    background-position: bottom;
+    background-position: center;
 }
 
 .event-page {
@@ -21,11 +22,10 @@
 .event-page-container {
     width: 1100px;
     max-width: 95%;
-    min-height: 800px;
+    min-height: 400px;
     margin: 2em auto;
-    /* -webkit-box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.1);
-    box-shadow: 0px 0px 50px 0px rgba(156, 156, 156, 0.1); */
     border: 1px solid #e9e9eb;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: Lato;
     background: #fff;
@@ -60,8 +60,9 @@
 .event-date-time-location {
     display: inline-block;
     vertical-align: top;
-    text-align: right;
-    width: 400px;
+    float: right;
+    text-align: left;
+    width: 300px;
 }
 
 .event-date, .event-time {
@@ -126,7 +127,7 @@
 .comments-list-item-empty {
     list-style: none;
     text-align: center;
-    color: #4f4f4f;
+    color: #b9b9b9;
     margin-bottom: 15px;
     font-family: Lato;
 }
@@ -173,7 +174,7 @@
 
 .comments-title {
     font-family: Lato;
-    font-weight: bold;
+    font-weight: 300;
     margin: 0;
     padding: 15px 20px;
     font-size: 21px;
@@ -216,6 +217,7 @@
 }
 
 .comment-error-message {
+    font-weight: 300;
     min-height: 20px;
     color: #f25b5d;
     padding-left: 30px;
