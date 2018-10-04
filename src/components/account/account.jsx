@@ -10,7 +10,7 @@ class Account extends Component {
         super(props);
 
         this.state = {
-            //username, email, name, bio, gender, photoURL
+            // username, email, name, gender, photoURL
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -19,6 +19,11 @@ class Account extends Component {
     handleInputChange(el) {
         let val = el.target.value;
         let property = el.target.name;
+
+        let update = {};
+        update[property] = val;
+
+        firebase.database().ref(`users/${this.props.user.uid}`).update(update)
 
         this.setState({
             [property]: val
@@ -41,7 +46,6 @@ class Account extends Component {
                 <div className="account-nav-container">
                     <ul className="account-nav-list">
                         <li className="account-nav-list-item">Edit Profile</li>
-                        <li className="account-nav-list-item">Change Password</li>
                     </ul>
                 </div>
                 {/* Account Info Container */}
@@ -60,15 +64,6 @@ class Account extends Component {
                             </div>
                             <div className="account-info-form-field-input">
                                 <input name="name" placeholder="name" onChange={this.handleInputChange} value={this.state.name} type="text"/>
-                            </div>
-                        </div>
-                        {/* Username */}
-                        <div className="account-info-form-field">
-                            <div className="account-info-form-field-label">
-                                <label htmlFor="username">Username</label>
-                            </div>
-                            <div className="account-info-form-field-input">
-                                <input name="username" placeholder="username" onChange={this.handleInputChange} value={this.state.username} type="text"/>
                             </div>
                         </div>
                         {/* Email */}
