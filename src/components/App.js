@@ -32,25 +32,26 @@ class App extends Component {
       creatingEvent: false,
       // Events
       events: [],
-
+      toggleSignIn: false
     }
     // Config for firebaseAuthUi - Authentification
     this.uiConfig = {
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
         signInSuccessWithAuthResult: (data) => {
+
+          this.toggleSignIn()
           // If the user signing-in is a new user
           // We will add them to the firebase database
           if(data.additionalUserInfo.isNewUser === true) {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
           } 
-
         },
         signInFailure: function(error) {
           // Some unrecoverable error occurred during sign-in.
@@ -61,11 +62,12 @@ class App extends Component {
           alert(error)
         }
       },
-      signInFlow: "redirect"
+      signInFlow: "popup"
     }
     // Create Event - Add to Database
     this.createEvent = this.createEvent.bind(this);
     this.toggleCreateEventWindow = this.toggleCreateEventWindow.bind(this);
+    this.toggleSignIn = this.toggleSignIn.bind(this);
     this.uploadEventImg = this.uploadEventImg.bind(this);
   }
 
@@ -110,6 +112,10 @@ class App extends Component {
   toggleCreateEventWindow(){
     this.setState({creatingEvent: !this.state.creatingEvent})
   }
+
+  toggleSignIn(){
+    this.setState({toggleSignIn: !this.state.toggleSignIn})
+  }
   // Adds event to firebase database
   createEvent(event){
     // Add Firebase call to push event to database
@@ -126,7 +132,6 @@ class App extends Component {
     // Close create event modal
     this.toggleCreateEventWindow();
   }
-
   // Everytime a user creates an event, we will upload the image for that event
   // Once the upload is succesfull we will add the url for that image to the corresponding event
   uploadEventImg(file, event_id) {
@@ -199,8 +204,26 @@ class App extends Component {
             exact path="/"
             render={() => 
               <div>
-                <Navbar isLandingPage={true} authUser={this.state.authUser}/>
+                <Navbar toggleSignIn={this.toggleSignIn} isLandingPage={true} authUser={this.state.authUser}/>
                 <LandingPage/>
+                {/* {
+                  this.state.toggleSignIn === true
+                    ? 
+                      <div>
+                        <div onClick={this.toggleSignIn} className="firebase_ui-outer-container"></div>
+                        <StyledFriebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                      </div>
+                    : null
+                } */}
+                {
+                  this.state.toggleSignIn === true
+                    ? 
+                      <div className="sign-in-container">
+                        <div onClick={this.toggleSignIn} className="firebase_ui-outer-container"></div>
+                        <StyledFriebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+                      </div>
+                    : null
+                }                
               </div>
               
             }
