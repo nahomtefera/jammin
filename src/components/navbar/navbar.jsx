@@ -29,7 +29,6 @@ class Navbar extends Component {
                         </ul>
                     :
                         <ul className="navbar-list-container">
-                            <li className="navbar-list-item" ><Link to="/">Landing Page</Link></li>
                             <li className="navbar-list-item sign-in-button"><a onClick={this.props.toggleSignIn}>Login</a></li>
                         </ul>
                 }
