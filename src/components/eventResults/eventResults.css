@@ -29,6 +29,7 @@
 
 .event-results {
     display: inline-block;
+    max-width: 100%;
     text-align: left;
     position: relative;
     -webkit-animation: slideLeft .4s;
