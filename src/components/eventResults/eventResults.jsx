@@ -23,15 +23,28 @@ class EventResults extends Component {
         this.changeFilter = this.changeFilter.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.updateEvents = this.updateEvents.bind(this)
+        this.updateAllEvents = this.updateAllEvents.bind(this)
     }
 
     componentWillMount(){
+        this.updateAllEvents(this.props)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.events!==this.props.events){
+            this.updateAllEvents(nextProps)
+        }
+    }
+
+    // 
+
+    updateAllEvents(props) {
         let today = moment().format("dddd, MMMM DD YYYY")
         let eventsToday = [];
         let allEvents = [];
         let myEvents = []
         
-        this.props.events.map((event)=>{
+        props.events.map((event)=>{
             let date = event.date;
             // Transform dates to unix to be able to compare dates
             let dateUnix = moment(date).unix()
@@ -47,8 +60,8 @@ class EventResults extends Component {
                 eventsToday.push(event)
             }
             // If the user is going to events we will add the to myEvents
-            this.props.currentUserInfo.eventsGoing!== undefined && this.props.currentUserInfo.eventsGoing.length !== 0 
-                ? this.props.currentUserInfo.eventsGoing.map((eventGoingId)=>{
+            props.currentUserInfo.eventsGoing!== undefined && props.currentUserInfo.eventsGoing.length !== 0 
+                ? props.currentUserInfo.eventsGoing.map((eventGoingId)=>{
                     // console.log(eventGoingId)
                     // console.log("event id: ",event.id)
                     if(eventGoingId === event.id && dateUnix >= todayUnix) {

@@ -124,7 +124,12 @@ class App extends Component {
     .then(()=>{
       // If the user doesn't upload a picture, let's refresh
       if(event.uploadedImg === false) {
-        window.location.reload()
+        // window.location.reload()
+        let events = []
+        db.getChildEvents().on("child_added", snap=>{
+          events.unshift(snap.val())
+        });
+        this.setState({events})
       }
       // Send IMG file to method that will upload it to storage
       this.uploadEventImg(event.uploadedImg, event.id);
@@ -169,7 +174,11 @@ class App extends Component {
         .update({ imageURL: downloadURL})
         .then(()=>{
           // Reload page to be able to see the picture uploaded
-          window.location.reload()
+          let events = []
+          db.getChildEvents().on("child_added", snap=>{
+            events.unshift(snap.val())
+          });
+          this.setState({events})
         })
       });
     });
