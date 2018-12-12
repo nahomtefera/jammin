@@ -6,7 +6,7 @@
     background:   linear-gradient(
         rgba(0, 0, 0, 0.55), 
         rgba(0, 0, 0, 0.55)
-      ), url(https://images.unsplash.com/photo-1491175372190-b0c288dcf1e2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a968ee54be947b275cb1439066816d4a&auto=format&fit=crop&w=2850&q=80);
+      ), url(../../images/landingPage/guitarist_xl.jpeg);
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -87,4 +87,42 @@
     font-size: 1.4em;
     color: #5a5a5a;
     padding: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .landing-page-intro {
+        background:   linear-gradient(
+            rgba(0, 0, 0, 0.55), 
+            rgba(0, 0, 0, 0.55)
+          ), url(../../images/landingPage/guitarist_768.jpg);
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        min-height: 725px;
+        margin-top: -70px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+    }
+    
+}
+
+@media only screen and (max-width: 450px) {
+
+    .landing-page-intro {
+        background:   linear-gradient(
+            rgba(0, 0, 0, 0.55), 
+            rgba(0, 0, 0, 0.55)
+          ), url(../../images/landingPage/guitarist_450.jpg);
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        min-height: 725px;
+        margin-top: -70px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+    }
+    
 }

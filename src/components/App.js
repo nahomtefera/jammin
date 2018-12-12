@@ -24,7 +24,7 @@ class App extends Component {
 
     this.state ={
       // Loader
-      loading: "true",
+      loading: "false",
       // SignedUser
       authUser: null,
       userInfo: null,
@@ -73,10 +73,10 @@ class App extends Component {
 
   componentWillMount(){
     // Loader
-    var self = this;
-    setTimeout(function(){ 
-      self.setState({loading:false})
-    }, 1500);
+    // var self = this;
+    // setTimeout(function(){ 
+    //   self.setState({loading:false})
+    // }, 1500);
 
     // If the user is authenticated we can get all the events
     let events = []
