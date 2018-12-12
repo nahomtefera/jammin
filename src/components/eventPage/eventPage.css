@@ -9,7 +9,7 @@
     z-index: -1;
     border-bottom: 1px solid #ececec;
     /* https://goo.gl/xe3trV,  https://goo.gl/yRVGha, https://goo.gl/nRpQTv, https://goo.gl/oK1cbV, https://goo.gl/sofGZn, */
-    background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25) ), url(https://goo.gl/sofGZn);
+    /* background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25) ), url(https://goo.gl/sofGZn); */
     background-size: cover;
     background-position: center;
 }

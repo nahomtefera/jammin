@@ -1,8 +1,9 @@
 .landing-page-container {
     /* background: #fafafa; */
+    /* height: 100vh; */
 }
 
-.landing-page-intro {
+.landing_page {
     background:   linear-gradient(
         rgba(0, 0, 0, 0.55), 
         rgba(0, 0, 0, 0.55)
@@ -11,8 +12,27 @@
     background-position: center;
     width: 100%;
     min-height: 725px;
-    margin-top: -70px;
+    height: 100vh;
+    /* margin-top: -70px; */
+    /* padding-bottom: 70px; */
     z-index: -1;
+    /* display: flex;
+    align-items: center; */
+}
+
+.landing-page-intro {
+    /* background:   linear-gradient(
+        rgba(0, 0, 0, 0.55), 
+        rgba(0, 0, 0, 0.55)
+      ), url(../../images/landingPage/guitarist_xl2.jpg);
+    background-size: cover;
+    background-position: center; */
+    width: 100%;
+    min-height: 725px;
+    height: 100%;
+    margin-top: -70px;
+    /* padding-bottom: 70px;
+    z-index: -1; */
     display: flex;
     align-items: center;
 }

@@ -212,7 +212,7 @@ class App extends Component {
             
             exact path="/"
             render={() => 
-              <div>
+              <div className="landing_page">
                 <Navbar toggleSignIn={this.toggleSignIn} isLandingPage={true} authUser={this.state.authUser}/>
                 <LandingPage/>
                 {/* {

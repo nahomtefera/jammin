@@ -16,7 +16,7 @@ class LandingPage extends Component {
                     </h1>
                 </div>
                 {/* Introduction - App Summary */}
-                <div className="landing-page-info-box-container">
+                <div className="landing-page-info-box-container" style={{display: "none"}}>
                     <div className="loading-page-info-box-item">
                         <h3 className="box-item-title">
                             Find Musicians
