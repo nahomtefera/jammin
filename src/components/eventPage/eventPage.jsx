@@ -115,13 +115,18 @@ class EventPage extends Component {
 
                 <div className="event-page-background"></div>
 
-                <div className="event-page-container">
+                <div className={this.state.loading === 'true' ? "hide" : "event-page-container"}>
                     <div className="event-page-header">
                         <span className="event-page-header-title">{this.state.event.title} </span>
                         at
                         <span className="event-page-header-location"> {this.state.event.location}</span>
                     </div>
 
+                    <div className="event-user-info">
+                        <img className="event-owner-img" src={this.state.event_owner.photoURL != null ? this.state.event_owner.photoURL : "https://goo.gl/cJ1cte"} alt="profile pic"/>
+                        <div className="event-owner-user-name">{this.state.event_owner.name}</div>
+                    </div>
+                    
                     <div className="event-info">
 
                         <div className="event-description">
@@ -138,11 +143,6 @@ class EventPage extends Component {
                             <div className="event-date">{this.state.event.location}</div>
                             <div className="event-date">{this.state.event.address ? this.state.event.address : ""}</div>
                         </div>
-                    </div>
-
-                    <div className="event-user-info">
-                        <img className="event-owner-img" src={this.state.event_owner.photoURL != null ? this.state.event_owner.photoURL : "https://goo.gl/cJ1cte"} alt="profile pic"/>
-                        <div className="event-owner-user-name">{this.state.event_owner.name}</div>
                     </div>
 
                     {/* COMMENTS SECTION */}
