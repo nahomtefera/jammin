@@ -144,56 +144,56 @@ class EventPage extends Component {
                         <img className="event-owner-img" src={this.state.event_owner.photoURL != null ? this.state.event_owner.photoURL : "https://goo.gl/cJ1cte"} alt="profile pic"/>
                         <div className="event-owner-user-name">{this.state.event_owner.name}</div>
                     </div>
-                </div>
 
-                {/* COMMENTS SECTION */}
-                <div className="comments-container">
-                    <h1 className="comments-title">Comments</h1>
+                    {/* COMMENTS SECTION */}
+                    <div className="comments-container">
+                        <h1 className="comments-title">Comments</h1>
 
-                    <div className="comments-messages">
-                        <ul className="comments-list-container">
-                            {
-                                this.state.comments !== null
-                                    ? this.state.comments.length > 0
-                                        ? this.state.comments.map((comment)=>{
-                                            return <li key={comment.timestamp} className="comments-list-item">
-                                                <div className="comments-list-outer-container">
-                                                    <span className="comment-user">{comment.user}</span>
-                                                    <span className="comment-message">{comment.message}</span>
-                                                    <span className="comment-time">{
-                                                        moment(comment.timestamp).format("MMM DD - HH:mm")
-                                                    }</span>
-                                                </div>
-                                            </li>
-                                        })
+                        <div className="comments-messages">
+                            <ul className="comments-list-container">
+                                {
+                                    this.state.comments !== null
+                                        ? this.state.comments.length > 0
+                                            ? this.state.comments.map((comment)=>{
+                                                return <li key={comment.timestamp} className="comments-list-item">
+                                                    <div className="comments-list-outer-container">
+                                                        <span className="comment-user">{comment.user}</span>
+                                                        <span className="comment-message">{comment.message}</span>
+                                                        <span className="comment-time">{
+                                                            moment(comment.timestamp).format("MMM DD - HH:mm")
+                                                        }</span>
+                                                    </div>
+                                                </li>
+                                            })
+                                            : <li className="comments-list-item-empty">No comments yet.</li>
                                         : <li className="comments-list-item-empty">No comments yet.</li>
-                                    : <li className="comments-list-item-empty">No comments yet.</li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div className="comment-input-container">
-                        <div className="comment-error-message">
-                            {
-                                this.state.comment_error === true 
-                                    ? "* Comment is empty or to short"
-                                    : null
-                            }
+                                }
+                            </ul>
                         </div>
 
-                        {
-                            this.props.currentUser.photoURL !== null 
-                                ? <img className="current-user-img" src={this.props.currentUser.photoURL} alt="profile pic"/>
-                                : <img className="current-user-img" src="https://goo.gl/cJ1cte" alt="no profile pic"/>
-                        }
-                    
-                        <textarea className="comment-input" 
-                            placeholder="Comment..." 
-                            value={this.state.newComment} 
-                            onChange={this.handleChange}
-                            name="comment" cols="30" rows="2"></textarea>
+                        <div className="comment-input-container">
+                            <div className="comment-error-message">
+                                {
+                                    this.state.comment_error === true 
+                                        ? "* Comment is empty or to short"
+                                        : null
+                                }
+                            </div>
+
+                            {
+                                this.props.currentUser.photoURL !== null 
+                                    ? <img className="current-user-img" src={this.props.currentUser.photoURL} alt="profile pic"/>
+                                    : <img className="current-user-img" src="https://goo.gl/cJ1cte" alt="no profile pic"/>
+                            }
                         
-                        <button className="comment-send-button" onClick={this.submitMessage}>Send</button>
+                            <textarea className="comment-input" 
+                                placeholder="Comment..." 
+                                value={this.state.newComment} 
+                                onChange={this.handleChange}
+                                name="comment" cols="30" rows="2"></textarea>
+                            
+                            <button className="comment-send-button" onClick={this.submitMessage}>Send</button>
+                        </div>
                     </div>
                 </div>
             </div>

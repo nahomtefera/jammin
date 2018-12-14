@@ -28,6 +28,7 @@ class App extends Component {
       // SignedUser
       authUser: null,
       userInfo: null,
+      firstLogIn: 'false',
       // Is User Creating Event
       creatingEvent: false,
       // Events
@@ -45,13 +46,12 @@ class App extends Component {
       ],
       callbacks: {
         signInSuccessWithAuthResult: (data) => {
-
           this.toggleSignIn()
           // If the user signing-in is a new user
           // We will add them to the firebase database
           if(data.additionalUserInfo.isNewUser === true) {
             db.doCreateUser(data.user.uid, data.user.displayName, data.user.email, data.user.photoURL)
-          } 
+          }
         },
         signInFailure: function(error) {
           // Some unrecoverable error occurred during sign-in.
@@ -101,7 +101,7 @@ class App extends Component {
         ? (
             firebase.database().ref(`users/${authUser.uid}`).once('value').then(snap=>{
               let userInfo = snap.val();
-              this.setState(() => ({ authUser: authUser, userInfo: userInfo }))
+              this.setState(() => ({ authUser: authUser, userInfo: userInfo,  firstLogIn: "true" }))
             })
           
           )
@@ -211,7 +211,11 @@ class App extends Component {
           <Route
             
             exact path="/"
-            render={() => 
+            render={() => {
+              // if (this.state.firstLogIn === "true") {
+              //   return <Redirect to='/events' />
+              // }
+              return(
               <div className="landing_page">
                 <Navbar toggleSignIn={this.toggleSignIn} isLandingPage={true} authUser={this.state.authUser}/>
                 <LandingPage/>
@@ -234,7 +238,7 @@ class App extends Component {
                     : null
                 }                
               </div>
-              
+              )}
             }
           />
 

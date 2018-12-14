@@ -8,8 +8,8 @@
     background: #fafafa;
     z-index: -1;
     border-bottom: 1px solid #ececec;
-    /* https://goo.gl/xe3trV,  https://goo.gl/yRVGha, https://goo.gl/nRpQTv, https://goo.gl/oK1cbV, https://goo.gl/sofGZn, */
-    /* background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25) ), url(https://goo.gl/sofGZn); */
+    /* https://goo.gl/xe3trV,  https://goo.gl/yRVGha, https://goo.gl/nRpQTv, https://goo.gl/oK1cbV, https://goo.gl/sofGZn, https://goo.gl/sofGZn */
+    background: linear-gradient( rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25) ), url(../../images/eventPage/eventpage.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -29,7 +29,6 @@
     box-sizing: border-box;
     font-family: Lato;
     background: #fff;
-    padding-bottom: 8.5em;
 }
 
 .event-info {
@@ -160,30 +159,30 @@
 /* COMMENT INPUT */
 
 .comments-container {
-    width: 800px;
-    max-width: 95%;
     border: 1px solid #e9e9eb;
+    border: none;
     margin: 0 auto;
-    margin-top: -8em;
+    margin-top: 3em;
     background: white;
-    margin-bottom: 8em;
     overflow: hidden;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
 
 .comments-title {
     font-family: Lato;
-    font-weight: 300;
+    font-weight: 600;
     margin: 0;
     padding: 15px 20px;
     font-size: 21px;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: #4f4f4f;
-    border-bottom: 1px solid #e9e9eb;
-    text-align: left;
+    color: #488be2;
+    border-bottom: 1px solid #e9e9eb41;
+    text-align: center;
 }
+
+/* .comments-container:hover .comments-title, .comments-container:focus .comments-title  {
+    color: #2277e6;
+} */
 
 .current-user-img {
     width: 25px;
@@ -199,7 +198,7 @@
     margin: 0;
     margin-top: 4em;
     width: 100%;
-    border-top: 1px solid #e9e9eb;
+    /* border-top: 1px solid #e9e9eb; */
 }
 
 .comment-input {
@@ -332,4 +331,12 @@
   40% {
     box-shadow: 0 2.5em 0 0;
   }
+}
+
+@media only screen and (min-width: 768px) {
+    .event-page-container {
+        box-shadow: 0px -4px 40px 1px #0000002e;
+        border-radius: 15px;
+        overflow: hidden;
+    }
 }
